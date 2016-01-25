@@ -10,6 +10,7 @@ import * as LayoutActions from '../actions/layout';
 
 import Header from '../components/layout/Header'
 import Sidebar from '../components/layout/Sidebar'
+import Home from '../components/Home'
 
 class App extends Component {
 

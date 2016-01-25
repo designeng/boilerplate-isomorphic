@@ -66,11 +66,7 @@ app.get('/*', function (req, res) {
                     return res.status(404).end('Not found');
                 let store;
 
-                if (process.env.NODE_ENV === 'production') {
-                    store = configureStore({user: user, article: article, version: packagejson.version});
-                } else {
-                    store = configureStore({user: user, version: packagejson.version});
-                }
+                store = configureStore({user: user});
 
                 const InitialView = (
                     <Provider store={store}>

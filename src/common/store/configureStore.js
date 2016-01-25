@@ -61,8 +61,6 @@ const finalCreateStore = compose(...middlewareBuilder())(createStore);
 
 export default function configureStore(initialState) {
     const store = finalCreateStore(rootReducer, initialState);
-    //let svReducer = store.getReducer();
-    //debugger;
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers
