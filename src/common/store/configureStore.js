@@ -9,7 +9,7 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import promiseMiddleware from '../api/promiseMiddleware';
 
-// import firebaseMiddleware from '../api/firebaseMiddleware';
+import firebaseMiddleware from '../api/firebaseMiddleware';
 
 /*MIDDLEWARE WILL ALWAYS HANDLE ACTION FIRST*/
 /*handle async actions*/
@@ -17,8 +17,8 @@ import promiseMiddleware from '../api/promiseMiddleware';
 const middlewareBuilder = () => {
     let middleware = {};
     /*thunk convert action creator function to the action object to pass it further*/
-    // let universalMiddleware = [thunk, promiseMiddleware, firebaseMiddleware];
-    let universalMiddleware = [thunk, promiseMiddleware];
+    let universalMiddleware = [thunk, promiseMiddleware, firebaseMiddleware];
+    // let universalMiddleware = [thunk, promiseMiddleware];
     let allComposeElements = [];
 
     if (process.browser) {
