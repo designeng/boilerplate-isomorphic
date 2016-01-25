@@ -1,7 +1,7 @@
 {
   "name": "boilerplate-isomorphic",
   "version": "0.1.1",
-  "description": "React.js boilerplate with Redux Design pattern!",
+  "description": "React.js boilerplate with Redux Design pattern",
   "scripts": {
     "slate": "rimraf -rf node_modules && npm install",
     "clean": "rimraf -rf dist",
