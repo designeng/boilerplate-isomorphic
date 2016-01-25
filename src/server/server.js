@@ -16,6 +16,7 @@ import { getUser } from '../common/api/user';
 import routes from '../common/routes';
 
 import renderFullPage from './utils/renderFullPage';
+import getInitialView from './utils/getInitialView';
 
 delete process.env.BROWSER;
 
@@ -51,18 +52,10 @@ app.get('/*', function (req, res) {
 
                 store = configureStore({user: user});
 
-                const InitialView = (
-                    <Provider store={store}>
-                        {() =>
-                            <RoutingContext {...renderProps} />
-                        }
-                    </Provider>
-                );
-
                 //This method waits for all render component promises to resolve before returning to browser
                 fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
                     .then(html => {
-                        const componentHTML = React.renderToString(InitialView);
+                        const componentHTML = React.renderToString(getInitialView(store, renderProps));
                         const initialState = store.getState();
                         res.status(200).end(renderFullPage(componentHTML, initialState))
                     })
