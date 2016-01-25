@@ -1,5 +1,5 @@
 {
-  "name": "isomorphic-redux-app",
+  "name": "boilerplate-isomorphic",
   "version": "0.1.1",
   "description": "React.js boilerplate with Redux Design pattern!",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SvitlanaShepitsena/isomorphic-redux-app.git"
+    "url": "git+https://github.com/designeng/boilerplate-isomorphic.git"
   },
   "license": "MIT",
   "dependencies": {
