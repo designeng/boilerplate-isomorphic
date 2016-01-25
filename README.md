@@ -1,0 +1,1 @@
+Thanks to [Isomorphic Redux App](https://github.com/caljrimmer/isomorphic-redux-app) boilerplate.
