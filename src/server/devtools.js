@@ -5,7 +5,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
  * Puts Redux DevTools into a separate window.
  * Based on https://gist.github.com/tlrobinson/1e63d15d3e5f33410ef7#gistcomment-1560218.
  */
-export default function createDevToolsWindow(store) {
+export default function createDevToolsWindow(store, parentWindow) {
     // Give it a name so it reuses the same window
     const name = 'Redux DevTools';
     const devToolsPopup = 'menubar=no,location=no,resizable=yes,scrollbars=no,status=no,width=450,height=600';
@@ -15,6 +15,10 @@ export default function createDevToolsWindow(store) {
         name,
         devToolsWindow
     );
+
+    parentWindow.onunload = function() {
+        win.close();
+    }
 
     if (!win) {
         console.error( // eslint-disable-line no-console
