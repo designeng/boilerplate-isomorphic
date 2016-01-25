@@ -30,8 +30,7 @@
     "redux": "^3.0.0",
     "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^0.1.0",
-    "redux-undo": "^0.5.0",
-    "rimraf": "^2.5.0"
+    "redux-undo": "^0.5.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
@@ -54,6 +53,7 @@
     "redux-devtools-filterable-log-monitor": "^0.4.0",
     "redux-devtools-log-monitor": "^1.0.1",
     "redux-logger": "^2.0.2",
+    "rimraf": "^2.5.0",
     "style-loader": "^0.8.0",
     "url-loader": "^0.5.6",
     "webpack": "1.4.13",
