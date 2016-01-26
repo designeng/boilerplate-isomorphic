@@ -14,22 +14,20 @@ function configureStore(resolver, compDef, wire) {
         if (process.browser) {
             if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
                 /* Production */
-                middleware = applyMiddleware(...universalMiddleware);
                 return [
-                    middleware
+                    applyMiddleware(...universalMiddleware)
                 ].concat(middleware.browser.production)
             } else {
                 /* Development */
-                middleware = applyMiddleware(...universalMiddleware, createLogger());
                 return [
-                    middleware
+                    applyMiddleware(...universalMiddleware, createLogger())
                 ].concat(middleware.browser.development)
             }
         } else {
             /* Server Side */
-            middleware = applyMiddleware(...universalMiddleware);
-            // return [middleware].concat(middleware.server)
-            return [middleware]
+            return [
+                applyMiddleware(...universalMiddleware)
+            ].concat(middleware.server)
         }
     }
     
@@ -41,12 +39,10 @@ function configureStore(resolver, compDef, wire) {
         const middleware    = options.middleware;
 
         let _middleware = getPlatformMiddleware(middleware);
-        console.log("_middleware:::", _middleware);
 
         const finalCreateStore = compose(..._middleware)(createStore);
         let store = finalCreateStore(rootReducer, initialState);
 
-        console.log("store:::", store);
         resolver.resolve(store);
     })
 }
