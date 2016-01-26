@@ -8,9 +8,9 @@ import connectModel from 'connect-data-decorator';
 })
 export default class NavigationSection extends React.Component {
 
-    static propTypes = {
-        itemsType: React.PropTypes.string
-    };
+    // static propTypes = {
+    //     itemsType: React.PropTypes.string
+    // }
 
     constructor() {
         super()
