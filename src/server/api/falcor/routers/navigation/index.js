@@ -1,7 +1,8 @@
-var Router = require('falcor-router');
-var $atom = require('falcor').Model.atom;
+import Router from 'falcor-router';
+import { Model } from 'falcor';
+let $atom = Model.atom;
 
-var data = {
+let data = {
     items: [
         {name: "Новости", href: "/news"}, 
         {name: "Наши тест-драйвы", href: "/drive-tests"},
@@ -16,7 +17,7 @@ var data = {
     ]
 };
     
-var NavigationRouter = Router.createClass([
+const NavigationRouter = Router.createClass([
         {
             route: "items",
             get: function() {
@@ -49,4 +50,4 @@ var NavigationRouter = Router.createClass([
         }
     ]);
 
-module.exports = NavigationRouter;
+export default NavigationRouter;

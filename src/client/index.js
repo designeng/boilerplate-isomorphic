@@ -31,6 +31,6 @@ React.render(
 );
 
 //runs devtools in a separate browser window
-if (process.env.NODE_ENV !== 'production') {
-   require('../server/devtools')(store, window);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//    require('../server/devtools')(store, window);
+// }
