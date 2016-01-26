@@ -38,19 +38,21 @@ export default {
         getChromeDevTools: {}
     },
     middleware: {
-        universal: universalMiddleware,
-        browser: {
-            production: [
-                historyMiddleware,
-            ],
-            development: [
-                historyMiddleware,
-                {$ref: 'chromeDevTools'},
-                devTools()
-            ],
-        },
-        server: [
-        ]
+        literal: {
+            universal: universalMiddleware,
+            browser: {
+                production: [
+                    historyMiddleware,
+                ],
+                development: [
+                    historyMiddleware,
+                    {$ref: 'chromeDevTools'},
+                    devTools()
+                ],
+            },
+            server: [
+            ]
+        }
     },
     store: {
         configureStore: {

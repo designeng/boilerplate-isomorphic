@@ -8,14 +8,7 @@ import createLogger from 'redux-logger';
 //      rootReducer,
 //      initialState
 function configureStore(resolver, compDef, wire) {
-    const rootReducer   = compDef.options.rootReducer;
-    const initialState  = compDef.options.initialState;
-
-    // {Object} middleware - {universal:..., browser:..., server:...}
-    const middleware    = compDef.options.middleware;
-
-    const getPlatformMiddleware = () => {
-        let middleware = {};
+    const getPlatformMiddleware = (middleware) => {
         let universalMiddleware = middleware.universal;
 
         if (process.browser) {
@@ -35,13 +28,27 @@ function configureStore(resolver, compDef, wire) {
         } else {
             /* Server Side */
             middleware = applyMiddleware(...universalMiddleware);
-            return [middleware].concat(middleware.server)
+            // return [middleware].concat(middleware.server)
+            return [middleware]
         }
     }
+    
+    wire(compDef.options).then((options) => {
+        const rootReducer   = options.rootReducer;
+        const initialState  = options.initialState;
 
-    const finalCreateStore = compose(...getPlatformMiddleware())(createStore);
-    const store = finalCreateStore(rootReducer, initialState);
-    resolver.resolve(store);
+        // {Object} middleware - {universal:..., browser:..., server:...}
+        const middleware    = options.middleware;
+
+        let _middleware = getPlatformMiddleware(middleware);
+        console.log("_middleware:::", _middleware);
+
+        const finalCreateStore = compose(..._middleware)(createStore);
+        let store = finalCreateStore(rootReducer, initialState);
+
+        console.log("store:::", store);
+        resolver.resolve(store);
+    })
 }
 
 // facets
