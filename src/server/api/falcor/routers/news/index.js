@@ -1,6 +1,5 @@
 import Router from 'falcor-router';
 import { Model } from 'falcor';
-import _ from 'lodash';
 
 let $atom = Model.atom;
 
@@ -21,7 +20,7 @@ const captions = [
 ]
 
 const top = (function (images, captions) {
-    return _.map(images, function (img, index) {
+    return images.map((img, index) => {
         var caption = captions[index];
         return {img: img, caption: caption};
     });
