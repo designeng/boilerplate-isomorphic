@@ -3,8 +3,6 @@ import coreSpec from './core.spec';
 
 delete process.env.BROWSER;
 
-wire(coreSpec).then(function(res){
+wire(coreSpec).then((res) => {
     // console.log("RES:", res);
-}).otherwise(function(error){
-    console.log("ERROR:", error);
-});
+}).otherwise((error) => console.log("ERROR:", error));
