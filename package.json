@@ -20,6 +20,7 @@
     "axios": "^0.7.0",
     "babel": "^5.8.21",
     "classnames": "^2.1.5",
+    "connect-data-decorator": "git://github.com/designeng/connect-data-decorator#v0.0.2",
     "essential-wire": "git://github.com/designeng/essential-wire",
     "express": "^4.13.3",
     "falcor": "^0.1.15",
