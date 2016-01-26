@@ -8,7 +8,7 @@ import NewsRouter           from './api/falcor/routers/news';
 import routes               from '../common/routes';
 
 export default {
-    $plugins:[
+    $plugins: [
         wireDebugPlugin,
         expressAppPlugin,
         wildcardRoutePlugin,
