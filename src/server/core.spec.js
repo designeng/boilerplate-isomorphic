@@ -13,9 +13,7 @@ export default {
         wildcardRoutePlugin
     ],
     app: {
-        createExpressApplication: {
-            
-        },
+        createExpressApplication: {},
         addWebpackMiddleware: {
             webpackConfig: webpackConfig
         },
