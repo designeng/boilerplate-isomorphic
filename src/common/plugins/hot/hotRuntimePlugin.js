@@ -8,6 +8,7 @@ const acceptHotRuntimeFacet = (resolver, facet, wire) => {
             target.replaceReducer(nextRootReducer);
         });
     }
+    resolver.resolve(target);
 }
 
 export default function hotRuntimePlugin(options) {
