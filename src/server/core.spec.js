@@ -15,7 +15,8 @@ export default {
             webpackConfig: webpackConfig
         },
         startServer: {
-            port: process.env.PORT || 3000
+            port: process.env.PORT || 3000,
+            verbose: true
         }
     }
 }
