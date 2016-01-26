@@ -17,7 +17,7 @@ function addWebpackMiddleware(resolver, facet, wire) {
 function startExpressServer(resolver, facet, wire) {
     const port = facet.options.port;
     let target = facet.target;
-    const server = target.listen(port, function () {
+    const server = target.listen(port, () => {
         if (facet.options.verbose === true){
             const host = server.address().address;
             const port = server.address().port;
