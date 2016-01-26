@@ -6,7 +6,14 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 // factories
+
+// options
+//      rootReducer,
+//      initialState
 function configureStore(resolver, compDef, wire) {
+    const rootReducer = compDef.options.rootReducer;
+    const initialState = compDef.options.initialState;
+    
     resolver.resolve();
 }
 
