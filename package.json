@@ -20,7 +20,11 @@
     "axios": "^0.7.0",
     "babel": "^5.8.21",
     "classnames": "^2.1.5",
+    "essential-wire": "git://github.com/designeng/essential-wire",
     "express": "^4.13.3",
+    "falcor": "^0.1.15",
+    "falcor-router": "^0.2.12",
+    "falcor-express": "git://github.com/designeng/falcor-express.git#request-to-context-check-array",
     "history": "1.13.0",
     "nodemon": "^1.8.1",
     "radium": "^0.15.3",
@@ -30,8 +34,7 @@
     "redux": "^3.0.0",
     "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^0.1.0",
-    "redux-undo": "^0.5.0",
-    "essential-wire": "git://github.com/designeng/essential-wire"
+    "redux-undo": "^0.5.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
