@@ -30,7 +30,8 @@
     "redux": "^3.0.0",
     "redux-router": "^1.0.0-beta3",
     "redux-thunk": "^0.1.0",
-    "redux-undo": "^0.5.0"
+    "redux-undo": "^0.5.0",
+    "essential-wire": "git://github.com/designeng/essential-wire"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
