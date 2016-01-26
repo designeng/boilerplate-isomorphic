@@ -35,7 +35,7 @@ function configureStore(resolver, compDef, wire) {
         } else {
             /* Server Side */
             middleware = applyMiddleware(...universalMiddleware);
-            return [middleware]
+            return [middleware].concat(middleware.server)
         }
     }
 
