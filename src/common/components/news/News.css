@@ -1,0 +1,30 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #fff;
+}
+
+.link {
+    width: auto;
+    height: auto;
+    background: inherit;
+
+    display: table;
+    width: 100%;
+}
+
+.cellImage {
+    width: 230px;
+    height: 130px;
+}
+
+.cell {
+    display: table-cell;
+    height: 3rem;
+    vertical-align: middle;
+}
+
+.caption {
+
+}

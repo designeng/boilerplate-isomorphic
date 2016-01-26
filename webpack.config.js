@@ -52,32 +52,7 @@ if (process.env.NODE_ENV === 'production') {
                 test: /\.js$/,
                 loader: 'babel',
                 exclude: /node_modules/,
-                include: __dirname,
-                query: {
-                    optional: ['runtime'],
-                    stage: 1,
-                    env: {
-                        development: {
-                            plugins: [
-                                'react-transform'
-                            ],
-                            extra: {
-                                'react-transform': {
-                                    transforms: [{
-                                        transform: 'react-transform-hmr',
-                                        imports: ['react'],
-                                        locals: ['module']
-                                    },
-                                        {
-                                            transform: 'react-transform-catch-errors',
-                                            imports: ['react', 'redbox-react']
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
+                include: __dirname
             },
                 {test: /\.(png|jpg|gif|jpeg)$/, loader: 'url-loader?limit=8192'},
                 {test: /\.css$/, loader: 'style-loader!css-loader'}

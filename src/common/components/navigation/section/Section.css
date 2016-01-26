@@ -1,0 +1,14 @@
+/* nav-mobile-item */
+
+.item {
+    font-size: 20px;
+}
+    
+/* nav-mobile-item__link */
+
+.itemLink {
+    padding: 12px 24px;
+    display: block;
+    color: rgb(255, 255, 255);
+    -webkit-tap-highlight-color: initial;
+}
