@@ -11,14 +11,15 @@ import createHistory        from 'history/lib/createBrowserHistory';
 // reducer
 import rootReducer          from '../reducers/index';
 
-// ---------- middlewares -----------
+// ---------- imported middlewares -----------
 // universal middleware
 import thunk from 'redux-thunk';
-import createLogger from 'redux-logger';
 
 import promiseMiddleware from '../api/promiseMiddleware';
 import firebaseMiddleware from '../api/firebaseMiddleware';
-// ---------- /middlewares -----------
+// ---------- /imported middlewares -----------
+
+let universalMiddleware = [thunk, promiseMiddleware, firebaseMiddleware];
 
 const historyMiddleware = reduxReactRouter({
     createHistory
@@ -36,19 +37,26 @@ export default {
     chromeDevTools: {
         getChromeDevTools: {}
     },
-    universalMiddleware: [thunk, promiseMiddleware, firebaseMiddleware],
     middleware: {
-        browser: [
-            historyMiddleware,
-            {$ref: 'chromeDevTools'},
-            devTools()
-        ],
-        server: [],
+        universal: universalMiddleware,
+        browser: {
+            production: [
+                historyMiddleware,
+            ],
+            development: [
+                historyMiddleware,
+                {$ref: 'chromeDevTools'},
+                devTools()
+            ],
+        },
+        server: [
+        ]
     },
     store: {
         configureStore: {
             rootReducer,
-            initialState
+            initialState,
+            middleware: {$ref: 'middleware'}
         },
         acceptHotRuntime: {
             reducersPath: '../reducers'
