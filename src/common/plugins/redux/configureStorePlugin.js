@@ -38,9 +38,7 @@ function configureStore(resolver, compDef, wire) {
         // {Object} middleware - {universal:..., browser:..., server:...}
         const middleware    = options.middleware;
 
-        let _middleware = getPlatformMiddleware(middleware);
-
-        const finalCreateStore = compose(..._middleware)(createStore);
+        const finalCreateStore = compose(...getPlatformMiddleware(middleware))(createStore);
         let store = finalCreateStore(rootReducer, initialState);
 
         resolver.resolve(store);
