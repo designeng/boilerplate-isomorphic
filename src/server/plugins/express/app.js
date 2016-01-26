@@ -21,7 +21,7 @@ function startExpressServer(resolver, facet, wire) {
         if (facet.options.verbose === true){
             const host = server.address().address;
             const port = server.address().port;
-            console.log('Express app listening at http://%s:%s', host, port);
+            console.info("==> 🌎  Express app listening at http://%s:%s", host, port);
         }
     });
     resolver.resolve(target);
