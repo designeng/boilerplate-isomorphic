@@ -9,6 +9,8 @@ delete process.env.BROWSER;
 //     // console.log("RES:", res);
 // }).otherwise((error) => console.log("ERROR:", error));
 
-wire(conifureStoreSpec).then((res) => {
-    // console.log("RES:", res);
-}).otherwise((error) => console.log("ERROR:", error));
+wire(conifureStoreSpec).then((context) => {
+    context.wire(coreSpec).then((_context) => {
+        console.log("RES::::::", _context.middleware);
+    }).otherwise((error) => console.log("ERROR coreSpec:", error));
+}).otherwise((error) => console.log("ERROR conifureStoreSpec:", error));
