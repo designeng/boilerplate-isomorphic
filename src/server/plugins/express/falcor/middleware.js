@@ -15,7 +15,7 @@ function addFalcorMiddleware(resolver, facet, wire) {
 export default function ExpressFalcorMiddlewarePlugin(options) {
     return {
         facets: {
-            addFalcorMiddleware: {
+            falcorMiddleware: {
                 initialize: addFalcorMiddleware
             }
         }

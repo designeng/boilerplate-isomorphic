@@ -54,7 +54,7 @@ function addWildcardRouteMiddleware(resolver, facet, wire) {
 export default function WildcardRoutePlugin(options) {
     return {
         facets: {
-            addWildcardRouteMiddleware: {
+            wildcardRouteMiddleware: {
                 initialize: addWildcardRouteMiddleware
             }
         }

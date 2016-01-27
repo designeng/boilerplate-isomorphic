@@ -1,8 +1,11 @@
 import wireDebugPlugin      from 'essential-wire/source/debug';
-import webpackConfig        from '../../webpack.config';
-import expressAppPlugin     from './plugins/express/app';
+import expressAppPlugin     from './plugins/express/application';
 import wildcardRoutePlugin  from './plugins/express/router/wildcard';
 import expressFalcorPlugin  from './plugins/express/falcor/middleware';
+import webpackPlugin        from './plugins/express/webpack/middleware';
+
+import webpackConfig        from '../../webpack.config';
+
 import NavigationRouter     from './api/falcor/routers/navigation';
 import NewsRouter           from './api/falcor/routers/news';
 import routes               from '../common/routes';
@@ -12,23 +15,24 @@ export default {
         wireDebugPlugin,
         expressAppPlugin,
         wildcardRoutePlugin,
-        expressFalcorPlugin
+        expressFalcorPlugin,
+        webpackPlugin
     ],
     app: {
-        createExpressApplication: {},
-        addWebpackMiddleware: {
+        expressApplication: {},
+        webpackMiddleware: {
             webpackConfig: webpackConfig
         },
-        addFalcorMiddleware: {
+        falcorMiddleware: {
             api: [
                 {apiPath: '/navigation/model.json' , router: NavigationRouter},
                 {apiPath: '/news/model.json'       , router: NewsRouter}
             ]
         },
-        addWildcardRouteMiddleware: {
+        wildcardRouteMiddleware: {
             routes: routes
         },
-        startServer: {
+        server: {
             port: process.env.PORT || 3000,
             verbose: true
         }

@@ -1,19 +1,6 @@
 import express from 'express';
 
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-
 // facets
-function addWebpackMiddleware(resolver, facet, wire) {
-    const webpackConfig = facet.options.webpackConfig;
-    const compiler = webpack(webpackConfig);
-    let target = facet.target;
-    target.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
-    target.use(webpackHotMiddleware(compiler));
-    resolver.resolve(target);
-}
-
 function startExpressServer(resolver, facet, wire) {
     const port = facet.options.port;
     let target = facet.target;
@@ -28,7 +15,7 @@ function startExpressServer(resolver, facet, wire) {
 }
 
 // factories
-function createExpressApplication(resolver, compDef, wire) {
+function expressApplication(resolver, compDef, wire) {
     const app = express();
     resolver.resolve(app);
 }
@@ -36,13 +23,10 @@ function createExpressApplication(resolver, compDef, wire) {
 export default function ExpressAppPlugin(options) {
     return {
         factories: {
-            createExpressApplication
+            expressApplication
         },
         facets: {
-            addWebpackMiddleware: {
-                initialize: addWebpackMiddleware
-            },
-            startServer: {
+            server: {
                 initialize: startExpressServer
             }
         }
