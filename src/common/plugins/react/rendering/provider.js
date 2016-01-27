@@ -5,7 +5,9 @@ import { ReduxRouter } from 'redux-router';
 
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-const renderRootProvider = (resolver, compDef, wire) => {
+var store;
+
+function renderRootProvider(resolver, compDef, wire) {
     const configureStore    = compDef.options.store;
     const rootElement       = compDef.options.rootElement;
     const routes            = compDef.options.routes;
@@ -15,7 +17,7 @@ const renderRootProvider = (resolver, compDef, wire) => {
         const history           = createBrowserHistory();
 
         const initialState  = window.__INITIAL_STATE__;
-        const store         = configureStore(initialState);
+        store         = configureStore(initialState);
 
         resolver.resolve(React.render(
             <Provider store={store}>
@@ -30,10 +32,22 @@ const renderRootProvider = (resolver, compDef, wire) => {
     });
 }
 
+function runDevToolsInParallel(resolver, facet, wire){
+    // let target = facet.target;
+    // console.log("store:::::>>>>>>>>", target);
+    // // if (process.env.NODE_ENV !== 'production') {
+    // //     require('../../../../server/devtools')(store, window);
+    // // }
+    resolver.resolve();
+}
+
 export default function ReactRenderProviderPlugin(options) {
     return {
         factories: {
             renderRootProvider
+        },
+        facets: {
+            'ready:after': runDevToolsInParallel
         }
     }
 }

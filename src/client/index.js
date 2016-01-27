@@ -10,9 +10,3 @@ wire(conifureStoreSpec).then((conifureStoreContext) => {
         // console.log("CLIENT context:::", context);
     }).otherwise((error) => console.log("ERROR coreSpec:", error));
 }).otherwise((error) => console.log("ERROR conifureStoreSpec:", error));
-
-
-//runs devtools in a separate browser window [ERROR, not working...]
-// if (process.env.NODE_ENV !== 'production') {
-//    require('../server/devtools')(store, window);
-// }
