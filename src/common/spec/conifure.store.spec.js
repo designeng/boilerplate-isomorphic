@@ -1,7 +1,9 @@
 // wire plugins
 import wireDebugPlugin      from 'essential-wire/source/debug';
 import configureStorePlugin from '../plugins/redux/configureStorePlugin'
+
 import hotRuntimePlugin     from '../plugins/hot/hotRuntimePlugin'
+
 import chromeDevToolsPlugin from '../plugins/devtools/chromeDevToolsPlugin'
 
 import { devTools }         from 'redux-devtools';

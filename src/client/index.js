@@ -1,34 +1,18 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
-import { ReduxRouter } from 'redux-router';
+import wire from 'essential-wire';
 
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-
-import configureStore from '../common/store/configureStore';
-import routes from '../common/routes';
+import clientSpec           from './client.spec';
+import conifureStoreSpec    from '../common/spec/conifure.store.spec';
 
 import "../../styles/index.css";
 
-const history = createBrowserHistory();
-/*Global object */
-const initialState = window.__INITIAL_STATE__;
-const rootElement = document.getElementById('root');
+wire(conifureStoreSpec).then((conifureStoreContext) => {
+    conifureStoreContext.wire(clientSpec).then((context) => {
+        // console.log("CLIENT context:::", context);
+    }).otherwise((error) => console.log("ERROR coreSpec:", error));
+}).otherwise((error) => console.log("ERROR conifureStoreSpec:", error));
 
-const store = configureStore(initialState);
 
-React.render(
-    <Provider store={store}>
-        {() =>
-            <ReduxRouter>
-                <Router children={routes} history={history}/>
-            </ReduxRouter>
-        }
-    </Provider>,
-    rootElement
-);
-
-//runs devtools in a separate browser window
+//runs devtools in a separate browser window [ERROR, not working...]
 // if (process.env.NODE_ENV !== 'production') {
 //    require('../server/devtools')(store, window);
 // }
