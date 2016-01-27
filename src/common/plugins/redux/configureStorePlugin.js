@@ -1,12 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-
 import createLogger from 'redux-logger';
-
-// factories
 
 // options
 //      rootReducer,
 //      initialState
+//      middleware
 function configureStore(resolver, compDef, wire) {
     const getPlatformMiddleware = (middleware) => {
         let universalMiddleware = middleware.universal;
