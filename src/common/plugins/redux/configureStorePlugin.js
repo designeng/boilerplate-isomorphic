@@ -45,21 +45,10 @@ function configureStore(resolver, compDef, wire) {
     })
 }
 
-// facets
-function addWebpackMiddleware(resolver, facet, wire) {
-    let target = facet.target;
-    resolver.resolve(target);
-}
-
 export default function configureStorePlugin(options) {
     return {
         factories: {
             configureStore
-        },
-        facets: {
-            addWebpackMiddleware: {
-                initialize: addWebpackMiddleware
-            }
         }
     }
 }
