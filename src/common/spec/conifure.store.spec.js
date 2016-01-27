@@ -25,8 +25,6 @@ const historyMiddleware = reduxReactRouter({
     createHistory
 });
 
-const initialState = {}
-
 export default {
     $plugins: [
         wireDebugPlugin,
@@ -52,10 +50,9 @@ export default {
         server: [
         ]
     },
-    store: {
-        configureStore: {
+    configureStore: {
+        getConfigureStore: {
             rootReducer,
-            initialState,
             middleware: {$ref: 'middleware'}
         },
         acceptHotRuntime: {

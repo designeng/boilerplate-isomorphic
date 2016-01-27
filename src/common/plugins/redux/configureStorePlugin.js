@@ -3,9 +3,8 @@ import createLogger from 'redux-logger';
 
 // options
 //      rootReducer,
-//      initialState
 //      middleware
-function configureStore(resolver, compDef, wire) {
+function getConfigureStore(resolver, compDef, wire) {
     const getPlatformMiddleware = (middleware) => {
         let universalMiddleware = middleware.universal;
 
@@ -31,22 +30,22 @@ function configureStore(resolver, compDef, wire) {
     
     wire(compDef.options).then((options) => {
         const rootReducer   = options.rootReducer;
-        const initialState  = options.initialState;
 
         // {Object} middleware - {universal:..., browser:..., server:...}
         const middleware    = options.middleware;
 
         const finalCreateStore = compose(...getPlatformMiddleware(middleware))(createStore);
-        let store = finalCreateStore(rootReducer, initialState);
+        
+        const configureStore = (initialState) => finalCreateStore(rootReducer, initialState);
 
-        resolver.resolve(store);
+        resolver.resolve(configureStore);
     })
 }
 
 export default function configureStorePlugin(options) {
     return {
         factories: {
-            configureStore
+            getConfigureStore
         }
     }
 }

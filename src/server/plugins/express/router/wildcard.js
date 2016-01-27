@@ -5,50 +5,54 @@ import createLocation from 'history/lib/createLocation';
 
 import { fetchComponentDataBeforeRender } from '../../../../common/api/fetchComponentDataBeforeRender';
 
-import configureStore   from '../../../../common/store/configureStore';
 import { getUser }      from '../../../../common/api/user';
 
 import renderFullPage from './view/renderFullPage';
 import getInitialView from './view/getInitialView';
 
 function addWildcardRouteMiddleware(resolver, facet, wire) {
-    let target = facet.target;
-    const routes = facet.options.routes;
-    target.get('/*', function (req, res) {
-        const location = createLocation(req.url);
-        getUser(user => {
-            if (!user) {
-                return res.status(401).end('Not Authorised');
-            }
+    let target      = facet.target;
+    const routes    = facet.options.routes;
 
-            match({routes, location}, (err, redirectLocation, renderProps) => {
+    wire(facet.options).then((options) => {
+        const configureStore    = options.configureStore
 
-                if (err) {
-                    console.error(err);
-                    return res.status(500).end('Internal server error');
+        target.get('/*', function (req, res) {
+            const location = createLocation(req.url);
+            getUser(user => {
+                if (!user) {
+                    return res.status(401).end('Not Authorised');
                 }
 
-                if (!renderProps)
-                    return res.status(404).end('Not found');
-                let store;
+                match({routes, location}, (err, redirectLocation, renderProps) => {
 
-                store = configureStore({user: user});
+                    if (err) {
+                        console.error(err);
+                        return res.status(500).end('Internal server error');
+                    }
 
-                //This method waits for all render component promises to resolve before returning to browser
-                fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
-                    .then(html => {
-                        const componentHTML = React.renderToString(getInitialView(store, renderProps));
-                        const initialState = store.getState();
-                        res.status(200).end(renderFullPage(componentHTML, initialState))
-                    })
-                    .catch(err => {
-                        res.end(renderFullPage("", {}))
-                    });
+                    if (!renderProps)
+                        return res.status(404).end('Not found');
+                    let store;
 
+                    store = configureStore({user: user});
+
+                    //This method waits for all render component promises to resolve before returning to browser
+                    fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
+                        .then(html => {
+                            const componentHTML = React.renderToString(getInitialView(store, renderProps));
+                            const initialState = store.getState();
+                            res.status(200).end(renderFullPage(componentHTML, initialState))
+                        })
+                        .catch(err => {
+                            res.end(renderFullPage("", {}))
+                        });
+
+                });
             });
         });
+        resolver.resolve(target);
     });
-    resolver.resolve(target);
 }
 
 export default function WildcardRoutePlugin(options) {
