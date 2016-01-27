@@ -15,7 +15,6 @@ const renderRootProvider = (resolver, compDef, wire) => {
         const history           = createBrowserHistory();
 
         const initialState  = window.__INITIAL_STATE__;
-
         const store         = configureStore(initialState);
 
         resolver.resolve(React.render(
