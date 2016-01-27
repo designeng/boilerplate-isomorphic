@@ -16,6 +16,9 @@ function startExpressServer(resolver, facet, wire) {
 
 // factories
 function expressApplication(resolver, compDef, wire) {
+    if (!compDef.options) {
+        throw new Error("Please set true value to create Express application.")
+    }
     const app = express();
     resolver.resolve(app);
 }

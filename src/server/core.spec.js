@@ -19,7 +19,7 @@ export default {
         webpackPlugin
     ],
     app: {
-        expressApplication: {},
+        expressApplication: true,
         webpackMiddleware: {
             webpackConfig: webpackConfig
         },
