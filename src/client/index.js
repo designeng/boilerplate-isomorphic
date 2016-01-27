@@ -3,6 +3,7 @@ import wire from 'essential-wire';
 import clientSpec           from './client.spec';
 import conifureStoreSpec    from '../common/spec/conifure.store.spec';
 
+// TODO: styles should be loaded with css-modules loader later for every component
 import "../../styles/index.css";
 
 wire(conifureStoreSpec).then((conifureStoreContext) => {
