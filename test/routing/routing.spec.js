@@ -27,7 +27,6 @@ describe('routing system',  () => {
             }
         })
         .then((context) => {
-            console.log(context);
             rootContext = context;
             done();
         })
