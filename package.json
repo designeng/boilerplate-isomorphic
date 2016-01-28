@@ -21,6 +21,7 @@
     "axios": "^0.7.0",
     "babel": "^5.8.21",
     "classnames": "^2.1.5",
+    "crossroads": "^0.12.2",
     "essential-wire": "git://github.com/designeng/essential-wire",
     "express": "^4.13.3",
     "falcor": "^0.1.15",
@@ -54,7 +55,7 @@
     "file-loader": "0.8.5",
     "jsdom-no-contextify": "^3.1.0",
     "merge": "^1.2.0",
-    "mocha": "^2.1.0",
+    "mocha": "^2.3.4",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.1.0",
@@ -80,7 +81,6 @@
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-sourcemap-loader": "^0.3.6",
     "karma-webpack": "^1.7.0",
-    "mocha": "^2.3.4",
     "phantomjs": "^1.9.19",
     "phantomjs-polyfill": "0.0.1"
   }
