@@ -9,7 +9,8 @@
     "dev": "set NODE_ENV=development&&nodemon src/server/index.js --progress --colors --profile",
     "prod": "npm run build&&set NODE_ENV=production&&node src/server/index.js --progress --colors --profile",
     "build": "npm run clean&&set NODE_ENV=production&&webpack -p --progress --colors --profile",
-    "test": "set NODE_ENV=test ** mocha --compilers js:babel/register --recursive"
+    "karma-browser": "karma start test/config/browser/karma.conf.js",
+    "test": "npm run karma-browser"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
     "babel-runtime": "^5.8.20",
+    "chai": "^3.5.0",
     "css-loader": "^0.9.0",
     "expect": "^1.12.1",
     "extract-text-webpack-plugin": "^0.8.2",
@@ -67,6 +69,19 @@
     "url-loader": "^0.5.6",
     "webpack": "1.4.13",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.2.0"
+    "webpack-hot-middleware": "^2.2.0",
+    "karma": "^0.13.15",
+    "karma-chai": "^0.1.0",
+    "karma-chai-plugins": "^0.6.1",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-cli": "^0.1.1",
+    "karma-mocha": "^0.2.1",
+    "karma-osx-reporter": "^0.2.1",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-sourcemap-loader": "^0.3.6",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.3.4",
+    "phantomjs": "^1.9.19",
+    "phantomjs-polyfill": "0.0.1"
   }
 }
