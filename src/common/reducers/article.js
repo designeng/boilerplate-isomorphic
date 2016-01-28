@@ -8,7 +8,8 @@ export default function article(state = {isFetching: false, articles: [], error:
             return Object.assign(
                 {},
                 state,
-                {isFetching: true
+                {
+                    isFetching: true
                 }
             );
         case ARTICLES_GET_SUCCESS:
