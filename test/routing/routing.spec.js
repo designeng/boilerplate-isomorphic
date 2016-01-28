@@ -1,3 +1,5 @@
+import { assert } from 'chai'
+
 import wire                 from 'essential-wire';
 import wireDebugPlugin      from 'essential-wire/source/debug';
 import routingSystemPlugin  from '../../src/server/plugins/routing/crossroads';
@@ -28,9 +30,7 @@ describe('routing system',  () => {
 
     beforeEach(before);
 
-    it('should match route',  () => {
-
-        // TODO
-        // assert.equal(document.querySelector('#app-wrapper').innerHTML, 'Navigation Component');
+    it('should have plugin',  () => {
+        assert.ok(routingSystemPlugin)
     });
 });
