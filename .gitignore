@@ -3,5 +3,7 @@ npm-debug.log
 .DS_Store
 dist
 
+docs
+
 bundle.js
 bundle1.js
