@@ -1,28 +1,29 @@
-import wire from 'essential-wire';
-import routingSystemPlugin from '../../server/plugins/routing';
 
-describe('routing system',  () => {
+
+import React, { Component }  from 'react';
+import ReactDom from 'react-dom';
+
+class Application extends Component {
+    render() {
+        return (
+            <div>123</div>
+        );
+    }
+}
+
+// TODO: root -> this (mocha, es6 ?)
+let root = {}
+
+describe('components rendering',  () => {
 
     const before = () => {
-        wire({
-            $plugins: [
-                routingSystemPlugin
-            ],
-            routingSystem: {
-                createRouter: {
-                    name: 'mainRouter'
-                },
-                routes: [
-                    {route: '/home'         , component: "Home"},
-                    {route: '/experiment'   , component: "Experiment"}
-                ]
-            }
-        })
+        root._rootElement = document.createElement("div");
+        document.body.appendChild(root._rootElement);
     }
 
     beforeEach(before);
 
-    it('should match route',  () => {
+    xit('should render application',  () => {
         ReactDom.render(<Application />, root._rootElement);
 
         // TODO

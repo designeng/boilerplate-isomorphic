@@ -1,28 +1,34 @@
-import React, { Component }  from 'react';
-import ReactDom from 'react-dom';
+import wire             from 'essential-wire';
+import wireDebugPlugin  from 'essential-wire/source/debug';
+// import routingSystemPlugin from '../../src/server/plugins/routing';
 
-class Application extends Component {
-    render() {
-        return (
-            <div>123</div>
-        );
-    }
-}
+console.log(__dirname);
 
-// TODO: root -> this (mocha, es6 ?)
-let root = {}
-
-describe('components rendering',  () => {
+describe('routing system',  () => {
 
     const before = () => {
-        root._rootElement = document.createElement("div");
-        document.body.appendChild(root._rootElement);
+        wire({
+            $plugins: [
+                wireDebugPlugin,
+                // routingSystemPlugin
+            ],
+            routingSystem: {
+                createRouter: {
+                    name: 'mainRouter'
+                },
+                routes: [
+                    {route: '/home'         , component: "Home"},
+                    {route: '/experiment'   , component: "Experiment"}
+                ]
+            }
+        })
+        .then((context) => console.log(context))
+        .otherwise((error) => console.log("ERROR::::", error))
     }
 
     beforeEach(before);
 
-    it('should render application',  () => {
-        ReactDom.render(<Application />, root._rootElement);
+    it('should match route',  () => {
 
         // TODO
         // assert.equal(document.querySelector('#app-wrapper').innerHTML, 'Navigation Component');
