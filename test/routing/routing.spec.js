@@ -1,4 +1,5 @@
 import { assert } from 'chai'
+import crossroads from 'crossroads'
 
 import wire                 from 'essential-wire';
 import wireDebugPlugin      from 'essential-wire/source/debug';
@@ -37,6 +38,13 @@ describe('routing system',  () => {
 
     it('should be ok',  (done) => {
         assert.ok(rootContext.routingSystem)
+        done();
+    });
+
+    it('should match route',  (done) => {
+        const routingSystem = rootContext.routingSystem;
+        routingSystem.parse('/experiment');
+        assert.ok({})
         done();
     });
 });
