@@ -24,9 +24,7 @@ function routesFacet(resolver, facet, wire) {
     const routes    = facet.options.routes;
 
     routes.forEach( item => {
-        target.addRoute(item.route, () => {
-            console.log(item.component);
-        });
+        target.addRoute(item.route, item.handler);
     })
     
     resolver.resolve(target);

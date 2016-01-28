@@ -1,13 +1,18 @@
-import { assert } from 'chai'
-import crossroads from 'crossroads'
+import chai, { expect } from 'chai';
+import spies from 'chai-spies';
 
 import wire                 from 'essential-wire';
 import wireDebugPlugin      from 'essential-wire/source/debug';
 import routingSystemPlugin  from '../../src/server/plugins/routing/crossroads';
 
+chai.use(spies);
+
 describe('routing system',  () => {
 
     let rootContext = {};
+
+    const experimentPageHandlerSpy    = chai.spy();
+    const homePageHandlerSpy          = chai.spy();
 
     const before = (done) => {
         wire({
@@ -21,8 +26,16 @@ describe('routing system',  () => {
                 },
                 initRoutes: {
                     routes: [
-                        {route: '/home'         , component: "Home"},
-                        {route: '/experiment'   , component: "Experiment"}
+                        {   
+                            route: '/home'         , 
+                            component: "Home",
+                            handler: homePageHandlerSpy
+                        },
+                        {   
+                            route: '/experiment'   , 
+                            component: "Experiment", 
+                            handler: experimentPageHandlerSpy
+                        }
                     ]
                 }
             }
@@ -37,14 +50,16 @@ describe('routing system',  () => {
     beforeEach(before);
 
     it('should be ok',  (done) => {
-        assert.ok(rootContext.routingSystem)
+        expect(rootContext.routingSystem).to.be.ok;
         done();
     });
 
     it('should match route',  (done) => {
         const routingSystem = rootContext.routingSystem;
         routingSystem.parse('/experiment');
-        assert.ok({})
+        expect(experimentPageHandlerSpy).to.have.been.called();
+        routingSystem.parse('/home');
+        expect(homePageHandlerSpy).to.have.been.called();
         done();
     });
 });
