@@ -1,6 +1,6 @@
-import wire             from 'essential-wire';
-import wireDebugPlugin  from 'essential-wire/source/debug';
-// import routingSystemPlugin from '../../src/server/plugins/routing';
+import wire                 from 'essential-wire';
+import wireDebugPlugin      from 'essential-wire/source/debug';
+import routingSystemPlugin  from '../../src/server/plugins/routing/crossroads';
 
 console.log(__dirname);
 
@@ -10,7 +10,7 @@ describe('routing system',  () => {
         wire({
             $plugins: [
                 wireDebugPlugin,
-                // routingSystemPlugin
+                routingSystemPlugin
             ],
             routingSystem: {
                 createRouter: {

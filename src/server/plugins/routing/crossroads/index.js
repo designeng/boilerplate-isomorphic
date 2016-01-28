@@ -2,7 +2,6 @@ import crossroads from 'crossroads';
 
 let routers = {}
 
-// factory
 function createRouter(resolver, compDef, wire) {
     let router;
     if (!compDef.options.name) {
@@ -17,10 +16,9 @@ function createRouter(resolver, compDef, wire) {
 }
 
 function destroyRouters(resolver, wire) {
-    routers.forEach( router => router.dispose());
+    resolver.resolve(routers.forEach( router => router.dispose()));
 }
 
-// facets
 function routesFacet(resolver, facet, wire) {
     let router      = facet.target;
     const routes    = facet.options.routes;
@@ -34,7 +32,7 @@ function routesFacet(resolver, facet, wire) {
     resolver.resolve(target);
 }
 
-export default function RoutingSystemPlugin(options) {
+module.exports = function RoutingSystemPlugin(options) {
     return {
         factories: {
             createRouter
