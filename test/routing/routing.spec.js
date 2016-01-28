@@ -6,7 +6,9 @@ import routingSystemPlugin  from '../../src/server/plugins/routing/crossroads';
 
 describe('routing system',  () => {
 
-    const before = () => {
+    let rootContext = {};
+
+    const before = (done) => {
         wire({
             $plugins: [
                 wireDebugPlugin,
@@ -16,19 +18,26 @@ describe('routing system',  () => {
                 createRouter: {
                     name: 'mainRouter'
                 },
-                routes: [
-                    {route: '/home'         , component: "Home"},
-                    {route: '/experiment'   , component: "Experiment"}
-                ]
+                initRoutes: {
+                    routes: [
+                        {route: '/home'         , component: "Home"},
+                        {route: '/experiment'   , component: "Experiment"}
+                    ]
+                }
             }
         })
-        .then((context) => console.log(context))
+        .then((context) => {
+            console.log(context);
+            rootContext = context;
+            done();
+        })
         .otherwise((error) => console.log("ERROR::::", error))
     }
 
     beforeEach(before);
 
-    it('should have plugin',  () => {
-        assert.ok(routingSystemPlugin)
+    it('should be ok',  (done) => {
+        assert.ok(rootContext.routingSystem)
+        done();
     });
 });

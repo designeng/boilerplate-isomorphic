@@ -20,11 +20,11 @@ function destroyRouters(resolver, wire) {
 }
 
 function routesFacet(resolver, facet, wire) {
-    let router      = facet.target;
+    let target      = facet.target;
     const routes    = facet.options.routes;
 
     routes.forEach( item => {
-        router.addRoute(item.route, () => {
+        target.addRoute(item.route, () => {
             console.log(item.component);
         });
     })
@@ -38,7 +38,7 @@ module.exports = function RoutingSystemPlugin(options) {
             createRouter
         },
         facets: {
-            routes: {
+            initRoutes: {
                 initialize: routesFacet
             }
         },
