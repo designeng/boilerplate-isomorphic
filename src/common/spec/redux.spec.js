@@ -15,10 +15,10 @@ import rootReducer          from '../reducers/index';
 
 // ---------- imported middlewares -----------
 // universal middleware
-import thunk from 'redux-thunk';
+import thunk                from 'redux-thunk';
 
-import promiseMiddleware from '../api/promiseMiddleware';
-import firebaseMiddleware from '../api/firebaseMiddleware';
+import promiseMiddleware    from '../api/promiseMiddleware';
+import firebaseMiddleware   from '../api/firebaseMiddleware';
 // ---------- /imported middlewares -----------
 
 let universalMiddleware = [thunk, promiseMiddleware, firebaseMiddleware];
