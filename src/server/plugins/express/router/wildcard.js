@@ -18,10 +18,11 @@ function addWildcardRouteMiddleware(resolver, facet, wire) {
         const messages      = options.messages;
 
         target.get('/*', function (req, res) {
-            const location = createLocation(req.url);
 
             if (!authorized)
                 return res.status(401).end(messages['404']);
+
+            const location = createLocation(req.url);
 
             match({routes, location}, (err, redirectLocation, renderProps) => {
 
