@@ -28,5 +28,11 @@ export default {
         isAuthorized: {
             user: {$ref: 'user'}
         }
+    },
+
+    store: {
+        getStore: {
+            user: {$ref: 'user'}
+        }
     }
 }

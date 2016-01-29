@@ -1,6 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
 
+function getStore(resolver, compDef, wire) {
+    const configureStore    = compDef.options.configureStore;
+    const user              = compDef.options.user;
+
+    let store = configureStore({user: user});
+    resolver.resolve(store);
+}
+
 // options
 //      rootReducer,
 //      middleware
@@ -45,7 +53,8 @@ function getConfigureStore(resolver, compDef, wire) {
 export default function configureStorePlugin(options) {
     return {
         factories: {
-            getConfigureStore
+            getConfigureStore,
+            getStore
         }
     }
 }
