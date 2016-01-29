@@ -3,7 +3,7 @@ import wireDebugPlugin      from 'essential-wire/source/debug';
 // custom plugins
 import getCurrentUserPlugin from './plugins/user/getCurrentUserPlugin';
 
-// import { getUser }      from '../../../../common/api/user';
+import { getUser }      from '../../../../common/api/user';
 
 import routes           from '../common/routes';
 
@@ -13,7 +13,7 @@ export default {
         getCurrentUserPlugin
     ],
     user: {
-        getUser: {}
+        getUser
     }
     expressRoutingMiddleware: {
 

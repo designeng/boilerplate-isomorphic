@@ -1,5 +1,6 @@
 import chai, { expect } from 'chai';
 import spies from 'chai-spies';
+import when from 'when';
 
 import wire                 from 'essential-wire';
 import wireDebugPlugin      from 'essential-wire/source/debug';
@@ -62,4 +63,65 @@ describe('routing system',  () => {
         expect(homePageHandlerSpy).to.have.been.called();
         done();
     });
+});
+
+
+const getUserPlugin = (options) => {
+    function getUserFactory(resolver, compDef, wire){
+        let promise = compDef.options;
+        when(promise).then((result) => resolver.resolve(result));
+    }
+
+    return {
+        factories: {
+            getUser: getUserFactory
+        }
+    }
+}
+
+describe('user info show be integrated into expressRoutingMiddleware',  () => {
+
+    let rootContext = {};
+
+    // probably it should be promise in common case
+    const getUserPromise = when.promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({name: 'John'})
+        }, 100);
+    });
+
+    const before = (done) => {
+        wire({
+            $plugins: [
+                wireDebugPlugin,
+                getUserPlugin
+            ],
+
+            user: {
+                getUser: getUserPromise
+            },
+
+            expressRoutingMiddleware: {
+                user: {$ref: 'user'}
+            }
+        })
+        .then((context) => {
+            rootContext = context;
+            done();
+        })
+        .otherwise((error) => console.log("ERROR::::", error))
+    }
+
+    beforeEach(before);
+
+    it('comtext member should be ok',  (done) => {
+        expect(rootContext.user).to.be.ok;
+        done();
+    });
+
+    it('comtext member should be ok',  (done) => {
+        expect(rootContext.user.name).to.equal('John');
+        done();
+    });
+
 });
