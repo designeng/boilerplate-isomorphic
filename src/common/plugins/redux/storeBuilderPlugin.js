@@ -40,7 +40,6 @@ function getStoreBuilder(resolver, compDef, wire) {
     
     wire(compDef.options).then((options) => {
         const rootReducer   = options.rootReducer;
-
         // {Object} middleware - {universal:..., browser:..., server:...}
         const middleware    = options.middleware;
 

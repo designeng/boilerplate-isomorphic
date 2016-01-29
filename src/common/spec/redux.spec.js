@@ -58,7 +58,6 @@ export default {
             middleware: {$ref: 'middleware'}
         },
         acceptHotRuntime: {
-            reducersPath: '../reducers'
         }
     }
 }
