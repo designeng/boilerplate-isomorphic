@@ -136,11 +136,6 @@ describe('user info for authorised user',  () => {
         done();
     });
 
-    it('context member should be ok',  (done) => {
-        expect(rootContext.user.name).to.equal('John');
-        done();
-    });
-
     it('authorized context member should be ok',  (done) => {
         expect(rootContext.authorized).to.be.ok;
         done();
