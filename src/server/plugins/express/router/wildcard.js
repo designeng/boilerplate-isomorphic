@@ -5,8 +5,6 @@ import createLocation from 'history/lib/createLocation';
 
 import { fetchComponentDataBeforeRender } from '../../../../common/api/fetchComponentDataBeforeRender';
 
-import { getUser }      from '../../../../common/api/user';
-
 import renderFullPage from './view/renderFullPage';
 import getInitialView from './view/getInitialView';
 
@@ -14,45 +12,44 @@ function addWildcardRouteMiddleware(resolver, facet, wire) {
     let target          = facet.target;
     const routes        = facet.options.routes;
 
-    wire(facet.options).then((options) => {
+    wire(facet.options).then(options => {
         const configureStore    = options.configureStore;
         const authorized        = options.authorized;
-
-        console.log("authorized::::::::", authorized);
+        const user              = options.user;
 
         target.get('/*', function (req, res) {
             const location = createLocation(req.url);
-            getUser(user => {
-                if (!user) {
-                    return res.status(401).end('Not Authorised');
+
+            if (!authorized)
+                return res.status(401).end('Not Authorised');
+
+            match({routes, location}, (err, redirectLocation, renderProps) => {
+
+                if (err) {
+                    console.error(err);
+                    return res.status(500).end('Internal server error');
                 }
 
-                match({routes, location}, (err, redirectLocation, renderProps) => {
+                if (!renderProps)
+                    return res.status(404).end('Not found');
 
-                    if (err) {
-                        console.error(err);
-                        return res.status(500).end('Internal server error');
-                    }
+                let store;
 
-                    if (!renderProps)
-                        return res.status(404).end('Not found');
-                    let store;
+                store = configureStore({user: user});
 
-                    store = configureStore({user: user});
+                //This method waits for all render component promises to resolve before returning to browser
+                fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
+                    .then(html => {
+                        const componentHTML = React.renderToString(getInitialView(store, renderProps));
+                        const initialState = store.getState();
+                        res.status(200).end(renderFullPage(componentHTML, initialState))
+                    })
+                    .catch(err => {
+                        res.end(renderFullPage("", {}))
+                    });
 
-                    //This method waits for all render component promises to resolve before returning to browser
-                    fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
-                        .then(html => {
-                            const componentHTML = React.renderToString(getInitialView(store, renderProps));
-                            const initialState = store.getState();
-                            res.status(200).end(renderFullPage(componentHTML, initialState))
-                        })
-                        .catch(err => {
-                            res.end(renderFullPage("", {}))
-                        });
-
-                });
             });
+
         });
         resolver.resolve(target);
     });
