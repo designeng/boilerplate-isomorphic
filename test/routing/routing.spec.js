@@ -65,9 +65,15 @@ describe('routing system',  () => {
     });
 });
 
+// probably it should be promise in common case
+const getUserPromise = when.promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve({name: 'John'})
+    }, 100);
+});
 
 const getUserPlugin = (options) => {
-    getUserFactory = (resolver, compDef, wire) => {
+    function getUserFactory(resolver, compDef, wire){
         let promise = compDef.options;
         when(promise).then((result) => resolver.resolve(result));
     }
@@ -79,47 +85,42 @@ const getUserPlugin = (options) => {
     }
 }
 
-// const isAuthorisedPlugin = (options) => {
-//     isAuthorised = (resolver, compDef, wire) => {
-//         wire(compDef.options).then((options) => {
-//             const user = options.user;
-//             resolver.resolve(!!user);
-//         });
-//     }
+const isAuthorisedPlugin = (options) => {
+    const isAuthorised = (resolver, compDef, wire) => {
+        wire(compDef.options).then((options) => {
+            const user = options.user;
+            resolver.resolve(!!user && !!user.name);
+        });
+    }
 
-//     return {
-//         factories: {
-//             isAuthorised
-//         }
-//     }
-// }
+    return {
+        factories: {
+            isAuthorised
+        }
+    }
+}
 
 describe('user info show be integrated into expressRoutingMiddleware',  () => {
 
     let rootContext = {};
-
-    // probably it should be promise in common case
-    const getUserPromise = when.promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve({name: 'John'})
-        }, 100);
-    });
 
     const before = (done) => {
         wire({
             $plugins: [
                 wireDebugPlugin,
                 getUserPlugin,
-                // isAuthorisedPlugin
+                isAuthorisedPlugin
             ],
 
             user: {
                 getUser: getUserPromise
             },
 
-            // isAuthorised: {
-            //     user: {$ref: 'user'}
-            // }
+            authorised: {
+                isAuthorised: {
+                    user: {$ref: 'user'}
+                }
+            }
         })
         .then((context) => {
             rootContext = context;
@@ -130,13 +131,23 @@ describe('user info show be integrated into expressRoutingMiddleware',  () => {
 
     beforeEach(before);
 
-    it('comtext member should be ok',  (done) => {
-        expect(rootContext.user).to.be.ok;
+    it('user.name should be not-empty string',  (done) => {
+        expect(rootContext.user.name).to.equal('John');
         done();
     });
 
-    it('comtext member should be ok',  (done) => {
+    it('context member should be ok',  (done) => {
         expect(rootContext.user.name).to.equal('John');
+        done();
+    });
+
+    it('authorised context member should be ok',  (done) => {
+        expect(rootContext.authorised).to.be.ok;
+        done();
+    });
+
+    it('user should be authorised',  (done) => {
+        expect(rootContext.authorised).to.equal(true);
         done();
     });
 
