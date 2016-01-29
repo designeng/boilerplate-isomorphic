@@ -11,11 +11,14 @@ import renderFullPage from './view/renderFullPage';
 import getInitialView from './view/getInitialView';
 
 function addWildcardRouteMiddleware(resolver, facet, wire) {
-    let target      = facet.target;
-    const routes    = facet.options.routes;
+    let target          = facet.target;
+    const routes        = facet.options.routes;
 
     wire(facet.options).then((options) => {
-        const configureStore    = options.configureStore
+        const configureStore    = options.configureStore;
+        const authorized        = options.authorized;
+
+        console.log("authorized::::::::", authorized);
 
         target.get('/*', function (req, res) {
             const location = createLocation(req.url);
