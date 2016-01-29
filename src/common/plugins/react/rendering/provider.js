@@ -8,16 +8,15 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 var store;
 
 function renderRootProvider(resolver, compDef, wire) {
-    const configureStore    = compDef.options.store;
     const rootElement       = compDef.options.rootElement;
     const routes            = compDef.options.routes;
 
     wire(compDef.options).then((options) => {
-        const configureStore    = options.configureStore;
+        const storeBuilder      = options.storeBuilder;
         const history           = createBrowserHistory();
 
         const initialState  = window.__INITIAL_STATE__;
-        store         = configureStore(initialState);
+        store               = storeBuilder(initialState);
 
         resolver.resolve(React.render(
             <Provider store={store}>

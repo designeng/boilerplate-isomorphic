@@ -1,6 +1,6 @@
 // wire plugins
 import wireDebugPlugin      from 'essential-wire/source/debug';
-import configureStorePlugin from '../plugins/redux/configureStorePlugin'
+import storeBuilderPlugin   from '../plugins/redux/storeBuilderPlugin'
 
 import hotRuntimePlugin     from '../plugins/hot/hotRuntimePlugin'
 
@@ -30,7 +30,7 @@ const historyMiddleware = reduxReactRouter({
 export default {
     $plugins: [
         wireDebugPlugin,
-        configureStorePlugin,
+        storeBuilderPlugin,
         hotRuntimePlugin,
         chromeDevToolsPlugin
     ],
@@ -52,8 +52,8 @@ export default {
         server: [
         ]
     },
-    configureStore: {
-        getConfigureStore: {
+    storeBuilder: {
+        getStoreBuilder: {
             rootReducer,
             middleware: {$ref: 'middleware'}
         },

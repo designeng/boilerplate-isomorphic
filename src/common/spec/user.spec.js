@@ -4,8 +4,9 @@ import wireDebugPlugin  from 'essential-wire/source/debug';
 import when             from 'when';
 
 // custom plugins
-import getUserPlugin        from '../../plugins/user/getUserPlugin';
-import isAuthorizedPlugin   from '../../plugins/user/isAuthorizedPlugin';
+import getUserPlugin        from '../plugins/user/getUserPlugin';
+import isAuthorizedPlugin   from '../plugins/user/isAuthorizedPlugin';
+import storeBuilderPlugin   from '../plugins/redux/storeBuilderPlugin'
 
 const getUserPromise = when.promise((resolve, reject) => {
     setTimeout(() => {
@@ -17,7 +18,8 @@ export default {
     $plugins: [
         wireDebugPlugin,
         getUserPlugin,
-        isAuthorizedPlugin
+        isAuthorizedPlugin,
+        storeBuilderPlugin
     ],
 
     user: {
@@ -32,7 +34,8 @@ export default {
 
     store: {
         getStore: {
-            user: {$ref: 'user'}
+            user            : {$ref: 'user'},
+            storeBuilder    : {$ref: 'storeBuilder'}
         }
     }
 }

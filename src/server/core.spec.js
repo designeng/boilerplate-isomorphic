@@ -31,9 +31,8 @@ export default {
         },
         wildcardRouteMiddleware: {
             routes          : routes,
-            configureStore  : {$ref: 'configureStore'},
-            authorized      : {$ref: 'authorized'},
-            user            : {$ref: 'user'}
+            store           : {$ref: 'store'},
+            authorized      : {$ref: 'authorized'}
         },
         server: {
             port            : process.env.PORT || 3000,

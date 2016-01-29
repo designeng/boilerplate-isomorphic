@@ -2,17 +2,19 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createLogger from 'redux-logger';
 
 function getStore(resolver, compDef, wire) {
-    const configureStore    = compDef.options.configureStore;
-    const user              = compDef.options.user;
+    wire(compDef.options).then(options => {
+        const storeBuilder      = options.storeBuilder;
+        const user              = options.user;
 
-    let store = configureStore({user: user});
-    resolver.resolve(store);
+        let store = storeBuilder({user: user});
+        resolver.resolve(store);
+    });
 }
 
 // options
 //      rootReducer,
 //      middleware
-function getConfigureStore(resolver, compDef, wire) {
+function getStoreBuilder(resolver, compDef, wire) {
     const getPlatformMiddleware = (middleware) => {
         let universalMiddleware = middleware.universal;
 
@@ -44,16 +46,16 @@ function getConfigureStore(resolver, compDef, wire) {
 
         const finalCreateStore = compose(...getPlatformMiddleware(middleware))(createStore);
         
-        const configureStore = (initialState) => finalCreateStore(rootReducer, initialState);
+        const storeBuilder = (initialState) => finalCreateStore(rootReducer, initialState);
 
-        resolver.resolve(configureStore);
+        resolver.resolve(storeBuilder);
     })
 }
 
-export default function configureStorePlugin(options) {
+export default function storeBuilderPlugin(options) {
     return {
         factories: {
-            getConfigureStore,
+            getStoreBuilder,
             getStore
         }
     }
