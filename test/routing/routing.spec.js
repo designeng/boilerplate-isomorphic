@@ -78,8 +78,8 @@ const getUserPlugin = (options) => {
     }
 }
 
-const isAuthorisedPlugin = (options) => {
-    const isAuthorised = (resolver, compDef, wire) => {
+const isAuthorizedPlugin = (options) => {
+    const isAuthorized = (resolver, compDef, wire) => {
         wire(compDef.options).then((options) => {
             const user = options.user;
             resolver.resolve(!!user && !!user.name);
@@ -88,7 +88,7 @@ const isAuthorisedPlugin = (options) => {
 
     return {
         factories: {
-            isAuthorised
+            isAuthorized
         }
     }
 }
@@ -109,15 +109,15 @@ describe('user info - authorisation',  () => {
             $plugins: [
                 wireDebugPlugin,
                 getUserPlugin,
-                isAuthorisedPlugin
+                isAuthorizedPlugin
             ],
 
             user: {
                 getUser: getUserPromise
             },
 
-            authorised: {
-                isAuthorised: {
+            authorized: {
+                isAuthorized: {
                     user: {$ref: 'user'}
                 }
             }
@@ -141,19 +141,19 @@ describe('user info - authorisation',  () => {
         done();
     });
 
-    it('authorised context member should be ok',  (done) => {
-        expect(rootContext.authorised).to.be.ok;
+    it('authorized context member should be ok',  (done) => {
+        expect(rootContext.authorized).to.be.ok;
         done();
     });
 
-    it('user should be authorised',  (done) => {
-        expect(rootContext.authorised).to.equal(true);
+    it('user should be authorized',  (done) => {
+        expect(rootContext.authorized).to.equal(true);
         done();
     });
 
 });
 
-describe('user info for not authorised user',  () => {
+describe('user info for not authorized user',  () => {
 
     let rootContext = {};
 
@@ -168,15 +168,15 @@ describe('user info for not authorised user',  () => {
             $plugins: [
                 wireDebugPlugin,
                 getUserPlugin,
-                isAuthorisedPlugin
+                isAuthorizedPlugin
             ],
 
             user: {
                 getUser: getUserPromise
             },
 
-            authorised: {
-                isAuthorised: {
+            authorized: {
+                isAuthorized: {
                     user: {$ref: 'user'}
                 }
             }
@@ -190,8 +190,8 @@ describe('user info for not authorised user',  () => {
 
     beforeEach(before);
 
-    it('user should not be authorised (user = null)',  (done) => {
-        expect(rootContext.authorised).to.equal(false);
+    it('user should not be authorized (user = null)',  (done) => {
+        expect(rootContext.authorized).to.equal(false);
         done();
     });
 
