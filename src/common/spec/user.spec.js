@@ -1,4 +1,4 @@
-// this spec should be wired in core.js with conifure.store.spec
+// should be previously wired: redux.spec
 
 import wireDebugPlugin  from 'essential-wire/source/debug';
 import when             from 'when';
@@ -8,6 +8,8 @@ import getUserPlugin        from '../plugins/user/getUserPlugin';
 import isAuthorizedPlugin   from '../plugins/user/isAuthorizedPlugin';
 import storeBuilderPlugin   from '../plugins/redux/storeBuilderPlugin'
 
+// TODO: create real async API invocation
+// move it in user plugin?
 const getUserPromise = when.promise((resolve, reject) => {
     setTimeout(() => {
         resolve({name: 'John'})

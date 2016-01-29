@@ -1,3 +1,7 @@
+// should be previously wired: 
+//      redux.spec
+//      user.spec
+
 import wireDebugPlugin      from 'essential-wire/source/debug';
 import expressAppPlugin     from './plugins/express/application';
 import wildcardRoutePlugin  from './plugins/express/router/wildcard';
