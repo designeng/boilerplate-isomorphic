@@ -15,22 +15,23 @@ function addWildcardRouteMiddleware(resolver, facet, wire) {
     wire(facet.options).then(options => {
         const store         = options.store;
         const authorized    = options.authorized;
+        const messages      = options.messages;
 
         target.get('/*', function (req, res) {
             const location = createLocation(req.url);
 
             if (!authorized)
-                return res.status(401).end('Not Authorised');
+                return res.status(401).end(messages['404']);
 
             match({routes, location}, (err, redirectLocation, renderProps) => {
 
                 if (err) {
                     console.error(err);
-                    return res.status(500).end('Internal server error');
+                    return res.status(500).end(messages['500']);
                 }
 
                 if (!renderProps)
-                    return res.status(404).end('Not found');
+                    return res.status(404).end(messages['404']);
 
                 //This method waits for all render component promises to resolve before returning to browser
                 fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
