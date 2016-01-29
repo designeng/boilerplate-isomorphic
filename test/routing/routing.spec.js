@@ -93,7 +93,7 @@ const isAuthorizedPlugin = (options) => {
     }
 }
 
-describe('user info - authorisation',  () => {
+describe('user info for authorised user',  () => {
 
     let rootContext = {};
 
@@ -153,7 +153,7 @@ describe('user info - authorisation',  () => {
 
 });
 
-describe('user info for not authorized user',  () => {
+describe('user info for NOT authorized user',  () => {
 
     let rootContext = {};
 
