@@ -6,7 +6,7 @@ import userSpec             from './modules/user/user.spec';
 
 delete process.env.BROWSER;
 
-// TODO: refactor wrapping
+// TODO: refactor this wrapping
 wire(userSpec).then((context) => {
     context.wire(conifureStoreSpec).then((context) => {
         context.wire(coreSpec).then((context) => {
