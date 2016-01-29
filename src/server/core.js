@@ -11,6 +11,6 @@ wire(reduxSpec).then(context => {
     context.wire(userSpec).then(context => {
         context.wire(coreSpec).then(context => {
 
-        }).otherwise(error => console.log("ERROR coreSpec:", error));
-    }).otherwise(error => console.log("ERROR userSpec:", error));
-}).otherwise(error => console.log("ERROR reduxSpec:", error));
+        }).otherwise(error => console.error("ERROR coreSpec:", error));
+    }).otherwise(error => console.error("ERROR userSpec:", error));
+}).otherwise(error => console.error("ERROR reduxSpec:", error));
