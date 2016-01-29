@@ -8,7 +8,7 @@
 npm i
 npm start
 ```
-switch beetween to routes
+switch beetween two routes
 + home
 + experiments
 
