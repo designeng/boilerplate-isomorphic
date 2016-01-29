@@ -3,6 +3,8 @@ import wire from 'essential-wire';
 import coreSpec             from './core.spec';
 import conifureStoreSpec    from '../common/spec/conifure.store.spec';
 
+// import userSpec             from '../modules/user/user.spec';
+
 delete process.env.BROWSER;
 
 wire(conifureStoreSpec).then((context) => {
