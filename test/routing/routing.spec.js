@@ -65,13 +65,6 @@ describe('routing system',  () => {
     });
 });
 
-// probably it should be promise in common case
-const getUserPromise = when.promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve({name: 'John'})
-    }, 100);
-});
-
 const getUserPlugin = (options) => {
     function getUserFactory(resolver, compDef, wire){
         let promise = compDef.options;
@@ -100,9 +93,16 @@ const isAuthorisedPlugin = (options) => {
     }
 }
 
-describe('user info show be integrated into expressRoutingMiddleware',  () => {
+describe('user info - authorisation',  () => {
 
     let rootContext = {};
+
+    // probably it should be promise in common case
+    const getUserPromise = when.promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({name: 'John'})
+        }, 100);
+    });
 
     const before = (done) => {
         wire({
@@ -148,6 +148,50 @@ describe('user info show be integrated into expressRoutingMiddleware',  () => {
 
     it('user should be authorised',  (done) => {
         expect(rootContext.authorised).to.equal(true);
+        done();
+    });
+
+});
+
+describe('user info for not authorised user',  () => {
+
+    let rootContext = {};
+
+    const getUserPromise = when.promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(null)
+        }, 100);
+    });
+
+    const before = (done) => {
+        wire({
+            $plugins: [
+                wireDebugPlugin,
+                getUserPlugin,
+                isAuthorisedPlugin
+            ],
+
+            user: {
+                getUser: getUserPromise
+            },
+
+            authorised: {
+                isAuthorised: {
+                    user: {$ref: 'user'}
+                }
+            }
+        })
+        .then((context) => {
+            rootContext = context;
+            done();
+        })
+        .otherwise((error) => console.log("ERROR::::", error))
+    }
+
+    beforeEach(before);
+
+    it('user should not be authorised (user = null)',  (done) => {
+        expect(rootContext.authorised).to.equal(false);
         done();
     });
 
