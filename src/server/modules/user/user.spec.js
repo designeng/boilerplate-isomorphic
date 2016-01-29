@@ -1,4 +1,7 @@
+// this spec should be wired in core.js with conifure.store.spec
+
 import wireDebugPlugin  from 'essential-wire/source/debug';
+import when             from 'when';
 
 // custom plugins
 import getUserPlugin        from '../../plugins/user/getUserPlugin';

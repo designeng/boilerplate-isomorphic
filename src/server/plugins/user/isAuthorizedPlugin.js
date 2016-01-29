@@ -1,4 +1,4 @@
-export default const isAuthorizedPlugin = (options) => {
+export default function isAuthorizedPlugin(options) {
     
     const isAuthorized = (resolver, compDef, wire) => {
         wire(compDef.options).then((options) => {
