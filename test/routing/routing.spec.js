@@ -67,7 +67,7 @@ describe('routing system',  () => {
 
 
 const getUserPlugin = (options) => {
-    function getUserFactory(resolver, compDef, wire){
+    getUserFactory = (resolver, compDef, wire) => {
         let promise = compDef.options;
         when(promise).then((result) => resolver.resolve(result));
     }
@@ -78,6 +78,21 @@ const getUserPlugin = (options) => {
         }
     }
 }
+
+// const isAuthorisedPlugin = (options) => {
+//     isAuthorised = (resolver, compDef, wire) => {
+//         wire(compDef.options).then((options) => {
+//             const user = options.user;
+//             resolver.resolve(!!user);
+//         });
+//     }
+
+//     return {
+//         factories: {
+//             isAuthorised
+//         }
+//     }
+// }
 
 describe('user info show be integrated into expressRoutingMiddleware',  () => {
 
@@ -94,16 +109,17 @@ describe('user info show be integrated into expressRoutingMiddleware',  () => {
         wire({
             $plugins: [
                 wireDebugPlugin,
-                getUserPlugin
+                getUserPlugin,
+                // isAuthorisedPlugin
             ],
 
             user: {
                 getUser: getUserPromise
             },
 
-            expressRoutingMiddleware: {
-                user: {$ref: 'user'}
-            }
+            // isAuthorised: {
+            //     user: {$ref: 'user'}
+            // }
         })
         .then((context) => {
             rootContext = context;
