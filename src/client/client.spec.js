@@ -16,9 +16,6 @@ export default {
             storeBuilder  : {$ref: 'storeBuilder'},
             rootElement,
             routes
-        },
-
-        //runs devtools in a separate browser window [ERROR, not working...]
-        // runDevToolsInParallel: {}
+        }
     }
 }
