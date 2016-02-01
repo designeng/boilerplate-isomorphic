@@ -47,6 +47,16 @@ if (process.env.NODE_ENV === 'production') {
 
     webpackConfig = merge(webpackConfig, {
         devtool: 'inline-source-map',
+        resolve: {
+            modulesDirectories: ['node_modules'],
+            extensions: ['', '.js']
+        },
+          
+        resolveLoader: {
+            modulesDirectories: ['node_modules'],
+            moduleTemplates: ['*-loader', '*'],
+            extensions: ['', '.js']
+        },
         module: {
             loaders: [{
                 test: /\.js$/,
