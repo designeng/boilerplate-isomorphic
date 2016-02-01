@@ -1,6 +1,5 @@
 import React from 'react';
-import { RoutingContext, match } from 'react-router';
-import { Provider } from 'react-redux';
+import { match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 
 import { fetchComponentDataBeforeRender } from '../../../../common/api/fetchComponentDataBeforeRender';
