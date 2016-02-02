@@ -1,6 +1,5 @@
 import React from 'react';
 import { match } from 'react-router';
-
 import createLocation from 'history/lib/createLocation';
 
 import { fetchComponentDataBeforeRender } from '../../../../common/api/fetchComponentDataBeforeRender';
