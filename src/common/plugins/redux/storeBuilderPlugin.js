@@ -56,17 +56,4 @@ export default function storeBuilderPlugin(options) {
             getStore
         }
     }
-}   const storeBuilder = (initialState) => finalCreateStore(rootReducer, initialState);
-
-        resolver.resolve(storeBuilder);
-    })
-}
-
-export default function storeBuilderPlugin(options) {
-    return {
-        factories: {
-            getStoreBuilder,
-            getStore
-        }
-    }
 }

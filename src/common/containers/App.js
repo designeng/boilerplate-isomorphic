@@ -12,7 +12,21 @@ import Header from '../components/layout/Header'
 import Sidebar from '../components/layout/Sidebar'
 import Home from '../components/Home'
 
-class App extends Component {
+function mapStateToProps(state) {
+    return {
+        article: state.article,
+        user: state.user,
+        layout: true
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(LayoutActions, dispatch);
+}
+
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class App extends Component {
 
     constructor(props) {
         super(props);
@@ -59,16 +73,4 @@ class App extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        article: state.article,
-        user: state.user,
-        layout: true
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return bindActionCreators(LayoutActions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
