@@ -24,7 +24,6 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(LayoutActions, dispatch);
 }
 
-
 @connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
 
@@ -72,5 +71,3 @@ export default class App extends Component {
         );
     }
 }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
