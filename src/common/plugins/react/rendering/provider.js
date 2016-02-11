@@ -16,13 +16,15 @@ export default function ReactRenderProviderPlugin(options) {
 }
 
 const renderRootProvider = (resolver, compDef, wire) => {
-    const rootElement           = compDef.options.rootElement;
-    const routes                = compDef.options.routes;
+    const { 
+        rootElement,
+        routes
+    } = compDef.options;
 
-    wire(compDef.options).then((options) => {
-        const storeBuilder      = options.storeBuilder;
-        const history           = createBrowserHistory();
-
+    wire(compDef.options).then(({
+        storeBuilder,
+        history
+    }) => {
         const initialState  = window.__INITIAL_STATE__;
         store               = storeBuilder(initialState);
 
