@@ -29,10 +29,10 @@ const renderRootProvider = (resolver, compDef, wire) => {
         store               = storeBuilder(initialState);
 
         const renderReduxRouter = () => {
-                    return <ReduxRouter>
-                                <Router children={ routes } history={ history }/>
-                            </ReduxRouter>
-                    }
+            return  <ReduxRouter>
+                        <Router children={ routes } history={ history }/>
+                    </ReduxRouter>
+        }
 
         resolver.resolve(React.render(
             <Provider store={ store } >
