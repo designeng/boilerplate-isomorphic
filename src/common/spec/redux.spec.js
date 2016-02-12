@@ -40,7 +40,7 @@ export default {
 
     universalMiddleware: [
         thunk, 
-        // promiseMiddleware,
+        promiseMiddleware,
         firebaseMiddleware,
         falcorMiddleware
     ],
