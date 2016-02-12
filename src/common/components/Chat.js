@@ -3,22 +3,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { contactsGet } from '../actions/chat';
+import * as ContactsActions from '../actions/contacts';
 
 function mapStateToProps(state) {
-    return state.article;
-
+    console.log("state:::::::::", state);
+    return {contacts: state.contacts};
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({contactsGet: contactsGet}, dispatch);
+    return bindActionCreators(ContactsActions, dispatch);
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
 class Chat extends Component {
     constructor(props) {
         super(props);
-        this.state = {users: [{name: 'one', key: 1}]}
     }
 
     componentDidMount() {
@@ -38,18 +37,18 @@ class Chat extends Component {
         console.log("TARGET::::", event.target.value);
     }
 
-    renderUsers(users) {
-        return users.map(user => {
-            return <li key={user.key}>{user.name}</li>
+    renderContacts(contacts) {
+        return contacts.map(user => {
+            return <li key={contact.key}>{contact.name}</li>
         })
     }
 
     render() {
-        const users = this.state.users;
+        const {isFetching, contacts, error} = this.props;
         return (
             <section>
                 <ul>
-                    {this.renderUsers(users)}
+                    {this.renderContacts(contacts)}
                 </ul>
                 <textarea id="messageField" onChange={this.handleChange.bind(this)}/>
                 <input type="button" value='Send Message' onClick={this.handleClick.bind(this)} />
@@ -59,7 +58,7 @@ class Chat extends Component {
 }
 
 Chat.need = [
-    contactsGet
+    ContactsActions.contactsGet
 ]
 
 export default Chat;

@@ -4,11 +4,13 @@ import undoable from 'redux-undo';
 
 import user from './user';
 import article from './article';
+import contacts from './contacts';
 
 const rootReducer = combineReducers({
-  user      : user,
-  article   : article,
-  router    : routerStateReducer
+    user      : user,
+    article   : article,
+    contacts  : contacts,
+    router    : routerStateReducer
 });
 
 export default rootReducer;

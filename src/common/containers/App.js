@@ -15,6 +15,7 @@ import Home from '../components/Home'
 function mapStateToProps(state) {
     return {
         article: state.article,
+        contacts: state.contacts,
         user: state.user,
         layout: true
     };

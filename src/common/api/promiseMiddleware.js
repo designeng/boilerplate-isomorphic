@@ -4,12 +4,10 @@ export default function promiseMiddleware() {
 
         if (!promise || rest.isFalcorRequest || rest.isFireBaseRequest) return next(action);
 
-        console.log("promiseMiddleware....!!!!!!!!!!!!!!!!!!!!");
-
         const SUCCESS = type + '_SUCCESS';
         const REQUEST = type + '_REQUEST';
         const FAILURE = type + '_FAILURE';
-        
+
         next({...rest, type: REQUEST});
 
         return promise

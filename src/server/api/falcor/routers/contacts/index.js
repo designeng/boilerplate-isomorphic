@@ -3,10 +3,10 @@ import { Model } from 'falcor';
 let $atom = Model.atom;
 
 let contacts = [
-    {name: "John"}, 
-    {name: "Bill"},
-    {name: "Robert"},
-    {name: "William"}
+    {name: "John", key: 0}, 
+    {name: "Bill", key: 1},
+    {name: "Robert", key: 2},
+    {name: "William", key: 3}
 ];
     
 const ContactsRouter = Router.createClass([

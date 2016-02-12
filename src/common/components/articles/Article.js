@@ -13,7 +13,7 @@ export default class Article extends React.Component {
     }
 
     render() {
-        const {isFetching,articles,error} = this.props;
+        const {isFetching, articles, error} = this.props;
         return (
             <div>
                 {error && <div> Cannot get Data from Firebase </div> }
