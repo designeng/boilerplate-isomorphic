@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.7.0",
-    "babel": "^5.8.21",
+    "babel": "^6.5.1",
     "classnames": "^2.1.5",
     "crossroads": "^0.12.2",
     "essential-wire": "git://github.com/designeng/essential-wire",
