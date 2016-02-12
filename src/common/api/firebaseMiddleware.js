@@ -2,10 +2,13 @@
 export default function firebaseMiddleware() {
     return next => action => {
         /* destructuring action object to local variables*/
-        const { promise, isFb, type, ...rest } = action;
+        const { promise, isFb, response, type, ...rest } = action;
+
+        console.log("response:::: firebaseMiddleware::: ", response);
 
         /* filter out all requests, that is not a Firebase promise */
-        if (!promise || !isFb) return next(action);
+        if (!promise && !isFb) return next(action);
+        
         const REQUEST = type + '_REQUEST';
         const SUCCESS = type + '_SUCCESS';
         const FAILURE = type + '_FAILURE';

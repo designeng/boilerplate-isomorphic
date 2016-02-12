@@ -19,9 +19,8 @@ import thunk                from 'redux-thunk';
 
 import promiseMiddleware    from '../api/promiseMiddleware';
 import firebaseMiddleware   from '../api/firebaseMiddleware';
+import falcorMiddleware     from '../api/falcorMiddleware';
 // ---------- /imported middlewares -----------
-
-let universalMiddleware = [thunk, promiseMiddleware, firebaseMiddleware];
 
 const historyMiddleware = reduxReactRouter({
     createHistory
@@ -34,11 +33,20 @@ export default {
         hotRuntimePlugin,
         chromeDevToolsPlugin
     ],
+
     chromeDevTools: {
         getChromeDevTools: {}
     },
+
+    universalMiddleware: [
+        thunk, 
+        promiseMiddleware, 
+        // firebaseMiddleware, 
+        falcorMiddleware
+    ],
+
     middleware: {
-        universal: universalMiddleware,
+        universal: {$ref: 'universalMiddleware'},
         browser: {
             production: [
                 historyMiddleware,
@@ -52,6 +60,7 @@ export default {
         server: [
         ]
     },
+
     storeBuilder: {
         getStoreBuilder: {
             rootReducer,
