@@ -1,14 +1,11 @@
 export default function falcorMiddleware() {
     return next => action => {
 
-        console.log("falcorMiddleware!!!!!!:::::", action.req);
         /* destructuring action object to local variables*/
         const { promise, isFalcorRequest, type, ...rest } = action;
 
         /* filter out all requests, that is not a Firebase promise */
-        if (!promise || !isFalcorRequest) return next(action);
-
-        console.log("isFalcorRequest:::::", isFalcorRequest);
+        if (!promise && !isFalcorRequest) return next(action);
 
         const REQUEST = type + '_REQUEST';
         const SUCCESS = type + '_SUCCESS';
@@ -17,11 +14,13 @@ export default function falcorMiddleware() {
         /*triggers CONTACTS_GET_REQUEST action*/
         next({...rest, type: REQUEST});
 
+        console.log("promise::::", promise);
+
         return promise
-            .then(req => {
+            .then(response => {
                 let contacts;
 
-                console.log("RESULT::::", req, req.data);
+                console.log("RESULT::::", response);
                 // var data = req.data;
                 // if (data === null) {
                 //     var error = new Error('No data.');
