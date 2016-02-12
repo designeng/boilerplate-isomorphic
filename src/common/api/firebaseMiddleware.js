@@ -2,12 +2,10 @@
 export default function firebaseMiddleware() {
     return next => action => {
         /* destructuring action object to local variables*/
-        const { promise, isFb, response, type, ...rest } = action;
-
-        console.log("response:::: firebaseMiddleware::: ", response);
+        const { promise, isFireBaseRequest, isFalcorRequest, response, type, ...rest } = action;
 
         /* filter out all requests, that is not a Firebase promise */
-        if (!promise && !isFb) return next(action);
+        if (!promise || !isFireBaseRequest || isFalcorRequest) return next(action);
         
         const REQUEST = type + '_REQUEST';
         const SUCCESS = type + '_SUCCESS';
@@ -15,9 +13,9 @@ export default function firebaseMiddleware() {
         /*triggers ARTICLES_GET_REQUEST action*/
         next({...rest, type: REQUEST});
         return promise
-            .then(req => {
+            .then(response => {
                 let articles;
-                var data = req.data;
+                var data = response.data;
                 if (data === null) {
                     var error = new Error('No data.');
                     next({...rest, error, type: FAILURE});

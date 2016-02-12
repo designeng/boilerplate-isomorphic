@@ -12,7 +12,7 @@ export function articlesGet() {
     return {
         type: ARTICLES_GET,
         promise: request.get('https://chicagowepapp.firebaseio.com/articles.json'),
-        isFb: true
+        isFireBaseRequest: true
     };
 }
 

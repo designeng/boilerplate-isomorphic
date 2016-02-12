@@ -14,8 +14,6 @@ export default function falcorMiddleware() {
         /*triggers CONTACTS_GET_REQUEST action*/
         next({...rest, type: REQUEST});
 
-        console.log("promise::::", promise);
-
         return promise
             .then(contacts => {
                 if (contacts === null) {
