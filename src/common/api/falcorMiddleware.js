@@ -17,28 +17,15 @@ export default function falcorMiddleware() {
         console.log("promise::::", promise);
 
         return promise
-            .then(response => {
-                let contacts;
-
-                console.log("RESULT::::", response);
-                // var data = req.data;
-                // if (data === null) {
-                //     var error = new Error('No data.');
-                //     next({...rest, error, type: FAILURE});
-                //     return false;
-                // }
-                /*conversion fb data from obj to array*/
-                // if (data) {
-                //     if (typeof data === "object") {
-                //         articles = Object.keys(data).map(key=> {
-                //             let article = data[key];
-                //             article.key = key;
-                //             return article;
-                //         });
-                //     } else {
-                //         articles = data;
-                //     }
-                // }
+            .then(contacts => {
+                if (contacts === null) {
+                    var error = new Error('No data.');
+                    next({...rest, error, type: FAILURE});
+                    return false;
+                } else {
+                    console.log("contacts:::", contacts);
+                    return contacts;
+                }
 
                 /* Slowing up request to see the loader*/
                 next({...rest, contacts, type: SUCCESS});
