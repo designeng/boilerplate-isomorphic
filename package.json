@@ -26,6 +26,7 @@
     "express": "^4.13.3",
     "falcor": "^0.1.15",
     "falcor-express": "git://github.com/designeng/falcor-express.git#request-to-context-check-array",
+    "falcor-http-datasource": "^0.1.3",
     "falcor-router": "^0.2.12",
     "history": "1.13.0",
     "nodemon": "^1.8.1",

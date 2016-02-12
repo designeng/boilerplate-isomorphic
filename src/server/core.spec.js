@@ -11,7 +11,9 @@ import webpackPlugin        from './plugins/express/webpack/middleware';
 import webpackConfig        from '../../webpack.config';
 
 import NavigationRouter     from './api/falcor/routers/navigation';
+import ContactsRouter       from './api/falcor/routers/contacts';
 import NewsRouter           from './api/falcor/routers/news';
+
 import routes               from '../common/routes';
 
 export default {
@@ -30,7 +32,8 @@ export default {
         falcorMiddleware: {
             api: [
                 {apiPath: '/navigation/model.json' , router: NavigationRouter},
-                {apiPath: '/news/model.json'       , router: NewsRouter}
+                {apiPath: '/news/model.json'       , router: NewsRouter},
+                {apiPath: '/contacts/model.json'   , router: ContactsRouter}
             ]
         },
         wildcardRouteMiddleware: {
