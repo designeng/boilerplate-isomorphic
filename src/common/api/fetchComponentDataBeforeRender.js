@@ -3,6 +3,8 @@
  * It is used to make sure server side rendered pages wait for APIs to resolve before returning res.end()
  */
 
+ import when from 'when';
+
 export function fetchComponentDataBeforeRender(dispatch, components, params) {
     const needs = components.reduce((prev, current) => {
         return (current.need || [])
@@ -10,6 +12,6 @@ export function fetchComponentDataBeforeRender(dispatch, components, params) {
             .concat(prev);
     }, []);
     const promises = needs.map(need => dispatch(need()));
-    return Promise.all(promises);
+    return when.all(promises);
 }
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as ChatActions from '../actions/chat';
+import { contactsGet } from '../actions/chat';
 
 function mapStateToProps(state) {
     return state.article;
@@ -11,11 +11,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(ChatActions, dispatch);
+    return bindActionCreators({contactsGet: contactsGet}, dispatch);
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Chat extends Component {
+class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = {users: [{name: 'one', key: 1}]}
@@ -57,3 +57,9 @@ export default class Chat extends Component {
         )
     }
 }
+
+Chat.need = [
+    contactsGet
+]
+
+export default Chat;
