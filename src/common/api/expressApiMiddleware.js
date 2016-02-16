@@ -1,6 +1,7 @@
 import { 
-    MESSAGES_GET,
-    MESSAGES_GET_FAILURE
+    MESSAGES_GET_REQUEST,
+    MESSAGES_GET_FAILURE,
+    MESSAGES_GET_SUCCESS
 } from '../actions/messages';
 
 export default function expressApiMiddleware() {
@@ -8,20 +9,18 @@ export default function expressApiMiddleware() {
 
         const { promise, type, ...rest } = action;
 
-        if (!promise && type !== MESSAGES_GET) return next(action);
+        if (!promise && type !== MESSAGES_GET_REQUEST) return next(action);
 
         return promise
             .then(messages => {
-                console.log("MESSAGES:::::", messages);
                 if (messages === null) {
                     var error = new Error('No data.');
                     next({...rest, error, type: MESSAGES_GET_FAILURE});
                     return false;
                 } else {
-                    console.log("messages:::", messages);
-
+                    messages = messages.data.messages;
                     next({...rest, error, messages, type: MESSAGES_GET_SUCCESS});
-                    return contacts;
+                    return messages;
                 }
 
                 return true;

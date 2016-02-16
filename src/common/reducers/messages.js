@@ -2,14 +2,14 @@ import {
     MESSAGE_SEND,
     MESSAGE_SEND_REQUEST,
 
-    MESSAGES_GET,
+    MESSAGES_GET_REQUEST,
     MESSAGES_GET_SUCCESS,
     MESSAGES_GET_FAILURE
 } from '../actions/messages';
 
 export default function messages(state = {}, action) {
 
-    console.log("ACTION IN MESSAGES REDUCER::::", action);
+    console.log("ACTION IN MESSAGES REDUCER::::", action.messages, action);
 
     switch (action.type) {
         case MESSAGE_SEND:
@@ -30,7 +30,7 @@ export default function messages(state = {}, action) {
                 }
             );
 
-        case MESSAGES_GET:
+        case MESSAGES_GET_REQUEST:
             return Object.assign(
                 {},
                 state,
@@ -45,7 +45,7 @@ export default function messages(state = {}, action) {
                 state,
                 {
                     isFetching: false,
-                    messagesList: action.messages
+                    messages: action.messages
                 }
             );
 

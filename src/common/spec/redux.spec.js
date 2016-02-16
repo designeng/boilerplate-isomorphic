@@ -18,7 +18,6 @@ import rootReducer          from '../reducers/index';
 import thunk                from 'redux-thunk';
 
 import promiseMiddleware    from '../api/promiseMiddleware';
-import firebaseMiddleware   from '../api/firebaseMiddleware';
 import expressApiMiddleware from '../api/expressApiMiddleware';
 import falcorMiddleware     from '../api/falcorMiddleware';
 import socketMiddleware     from '../api/socketMiddleware';
@@ -42,8 +41,7 @@ export default {
     },
 
     universalMiddleware: [
-        thunk, 
-        firebaseMiddleware,
+        thunk,
         expressApiMiddleware,
         falcorMiddleware,
         socketMiddleware,

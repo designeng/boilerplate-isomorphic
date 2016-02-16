@@ -18,6 +18,9 @@ export default function falcorMiddleware() {
         const SUCCESS = type + '_SUCCESS';
         const FAILURE = type + '_FAILURE';
 
+
+        console.info("action::::::", action);
+
         /*triggers CONTACTS_GET_REQUEST action*/
         next({...rest, type: CONTACTS_GET_REQUEST});
 
@@ -34,8 +37,8 @@ export default function falcorMiddleware() {
                     return contacts;
                 }
 
-                /* Slowing up request to see the loader*/
-                next({...rest, contacts, type: SUCCESS});
+                // /* Slowing up request to see the loader*/
+                // next({...rest, contacts, type: SUCCESS});
                 return true;
             })
     };

@@ -1,6 +1,6 @@
 import request from 'axios';
 
-export const MESSAGES_GET = 'MESSAGES_GET';
+export const MESSAGES_GET_REQUEST = 'MESSAGES_GET';
 export const MESSAGES_GET_FAILURE = 'MESSAGES_GET_FAILURE';
 export const MESSAGES_GET_SUCCESS = 'MESSAGES_GET_SUCCESS';
 
@@ -19,7 +19,7 @@ export function messageSend(data) {
 
 export function messagesGet(data) {
     return {
-        type                : MESSAGES_GET,
+        type                : MESSAGES_GET_REQUEST,
         promise             : request.get('/api/messages'),
         isSocketIoRequest   : false,
     };

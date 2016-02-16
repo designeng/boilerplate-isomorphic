@@ -10,7 +10,8 @@ export default class MessagesList extends Component {
         if(typeof messages === "undefined") return "";
         
         return messages.map(message => {
-            return <li key={message.key}>{message.name}</li>
+            let key = message.id;
+            return <li key={key}>{message.userId} : {message.text}</li>
         });
     }
 
@@ -19,7 +20,7 @@ export default class MessagesList extends Component {
 
         return (
             <section>
-                <ul>
+                <ul> 
                     { this.renderMessages(messages) }
                 </ul>
             </section>

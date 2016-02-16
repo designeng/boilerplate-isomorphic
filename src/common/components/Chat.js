@@ -10,8 +10,8 @@ import MessagesList from './chat/messages';
 
 function mapStateToProps(state) {
     return {
-        list            : state.contacts.list,
-        messagesList    : state.messages.messagesList
+        list        : state.contacts.list,
+        messages    : state.messages.messages
     };
 }
 
@@ -26,7 +26,7 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        this.props.contactsGet()
+        // this.props.contactsGet()
         this.props.messagesGet()
         this.textarea = document.getElementById("messageField");
     }
@@ -52,14 +52,16 @@ class Chat extends Component {
     }
 
     render() {
-        const { list, messagesList } = this.props;
+        const { list, messages } = this.props;
+
+        console.log("messages::::::::", messages);
 
         return (
             <section>
                 <ul>
                     { this.renderContacts(list) }
                 </ul>
-                <MessagesList messages={ this.props.messagesList }/>
+                <MessagesList messages={ this.props.messages }/>
                 <textarea id="messageField" onChange={this.handleChange.bind(this)}/>
                 <input type="button" value='Send Message' onClick={this.handleClick.bind(this)} />
             </section>

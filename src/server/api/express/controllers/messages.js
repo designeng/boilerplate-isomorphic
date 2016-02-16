@@ -8,6 +8,7 @@ const MessagesController = {
             var text = req.param('text');
 
             models.Message.create({
+                key : key,
                 user: user,
                 text: text
             }).then(
