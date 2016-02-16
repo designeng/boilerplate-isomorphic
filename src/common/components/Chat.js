@@ -6,8 +6,7 @@ import { bindActionCreators } from 'redux';
 import * as ContactsActions from '../actions/contacts';
 
 function mapStateToProps(state) {
-    console.log("state:::::::::", state);
-    return {contacts: state.contacts};
+    return {list: state.contacts.list};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -20,6 +19,11 @@ class Chat extends Component {
         super(props);
     }
 
+    componentWillMount() {
+        console.log("componentWillMount....");
+        this.props.contactsGet()
+    }
+
     componentDidMount() {
         // this.socket = io(this.props.socketIoHost);
         this.textarea = document.getElementById("messageField");
@@ -27,6 +31,7 @@ class Chat extends Component {
 
     handleClick() {
         let message = this.textarea.value
+        
         this.socket.emit('chat_click', {message: message});
         console.log("CLICK", message);
 
@@ -37,18 +42,21 @@ class Chat extends Component {
         console.log("TARGET::::", event.target.value);
     }
 
-    renderContacts(contacts) {
-        return contacts.map(user => {
+    renderContacts(contactsList) {
+        if(typeof contactsList === "undefined") return "";
+        
+        return contactsList.map(contact => {
             return <li key={contact.key}>{contact.name}</li>
-        })
+        });
     }
 
     render() {
-        const {isFetching, contacts, error} = this.props;
+        const { list } = this.props;
+
         return (
             <section>
                 <ul>
-                    {this.renderContacts(contacts)}
+                    { this.renderContacts(list) }
                 </ul>
                 <textarea id="messageField" onChange={this.handleChange.bind(this)}/>
                 <input type="button" value='Send Message' onClick={this.handleClick.bind(this)} />

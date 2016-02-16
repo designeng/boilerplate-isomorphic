@@ -3,7 +3,7 @@
  * It is used to make sure server side rendered pages wait for APIs to resolve before returning res.end()
  */
 
- import when from 'when';
+import when from 'when';
 
 export function fetchComponentDataBeforeRender(dispatch, components, params) {
     const needs = components.reduce((prev, current) => {

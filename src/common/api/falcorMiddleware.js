@@ -1,3 +1,10 @@
+import { 
+    CONTACTS_GET, 
+    CONTACTS_GET_REQUEST, 
+    CONTACTS_GET_SUCCESS, 
+    CONTACTS_GET_FAILURE 
+} from '../actions/contacts';
+
 export default function falcorMiddleware() {
     return next => action => {
 
@@ -12,16 +19,18 @@ export default function falcorMiddleware() {
         const FAILURE = type + '_FAILURE';
 
         /*triggers CONTACTS_GET_REQUEST action*/
-        next({...rest, type: REQUEST});
+        next({...rest, type: CONTACTS_GET_REQUEST});
 
         return promise
             .then(contacts => {
                 if (contacts === null) {
                     var error = new Error('No data.');
-                    next({...rest, error, type: FAILURE});
+                    next({...rest, error, type: CONTACTS_GET_FAILURE});
                     return false;
                 } else {
                     console.log("contacts:::", contacts);
+
+                    next({...rest, error, contacts, type: CONTACTS_GET_SUCCESS});
                     return contacts;
                 }
 
