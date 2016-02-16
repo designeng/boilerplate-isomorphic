@@ -22,22 +22,13 @@ class Chat extends Component {
         super(props);
     }
 
-    componentWillMount() {
-        console.log("componentWillMount....");
-        this.props.contactsGet()
-    }
-
     componentDidMount() {
+        this.props.contactsGet()
         this.textarea = document.getElementById("messageField");
     }
 
     handleClick() {
-        let message = this.textarea.value
-        
-        
-        console.log("CLICK", message, this.props.messageSend);
-
-        this.props.messageSend(message);
+        this.props.messageSend(this.textarea.value);
     }
 
     handleChange(event) {
