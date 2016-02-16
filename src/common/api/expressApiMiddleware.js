@@ -9,11 +9,7 @@ export default function expressApiMiddleware() {
 
         const { promise, type, isMessageExpressApiRequest, ...rest } = action;
 
-        console.log("expressApiMiddleware action::::::.....", action);
-
         if (!isMessageExpressApiRequest) return next(action);
-
-        console.log("expressApiMiddleware action::::::.....", action);
 
         return promise
             .then(messages => {
@@ -22,7 +18,6 @@ export default function expressApiMiddleware() {
                     next({...rest, error, type: MESSAGES_GET_FAILURE});
                     return false;
                 } else {
-                    console.log("expressApiMiddleware messages>>>>>>", messages);
                     messages = messages.data.messages;
                     next({...rest, error, messages, type: MESSAGES_GET_SUCCESS});
                     return messages;

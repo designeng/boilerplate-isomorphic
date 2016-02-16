@@ -28,14 +28,10 @@ export default function falcorMiddleware() {
                     next({...rest, error, type: CONTACTS_GET_FAILURE});
                     return false;
                 } else {
-                    console.log("contacts:::", contacts);
-
                     next({...rest, error, contacts, type: CONTACTS_GET_SUCCESS});
                     return contacts;
                 }
 
-                // /* Slowing up request to see the loader*/
-                // next({...rest, contacts, type: SUCCESS});
                 return true;
             })
     };
