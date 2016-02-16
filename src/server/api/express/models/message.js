@@ -1,6 +1,6 @@
 export default function(sequelize, DataTypes) {
     var Message = sequelize.define("Message", {
-        user: {
+        userId: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {

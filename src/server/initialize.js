@@ -22,12 +22,10 @@ module.exports = function () {
     });
 
     pairs.forEach(function (pair) {
-        console.log("pair:::", pair);
         models.Message.create({
-            user: pair[0],
+            userId: pair[0],
             text: pair[1]
         }).then(function (res) {
-            console.log("RES:::", res);
             addToQueue(noop);
         });
     });

@@ -4,13 +4,15 @@ import models from '../models';
 const MessagesController = {
 
     post: function (req, res) {
+            var user = req.param('user');
             var text = req.param('text');
 
             models.Message.create({
-                text: text,
+                user: user,
+                text: text
             }).then(
                 function() {
-                    res.json({ text: text});
+                    res.json({ text: text, user: user});
                 },
                 function(error) {
                     res.json({ error: error});

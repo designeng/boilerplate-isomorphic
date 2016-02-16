@@ -8,7 +8,8 @@ import usersActivity    from './noop/users/activity';
 
 delete process.env.BROWSER;
 
-// TODO: refactor this wrapping
+
+// TODO: refactor this wrapping!
 wire(reduxSpec).then(context => {
     context.wire(userSpec).then(context => {
         context.wire(coreSpec).then(context => {
