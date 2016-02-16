@@ -20,7 +20,9 @@ import thunk                from 'redux-thunk';
 import promiseMiddleware    from '../api/promiseMiddleware';
 import firebaseMiddleware   from '../api/firebaseMiddleware';
 import falcorMiddleware     from '../api/falcorMiddleware';
+import socketMiddleware     from '../api/socketMiddleware';
 // ---------- /imported middlewares -----------
+
 
 const historyMiddleware = reduxReactRouter({
     createHistory
@@ -50,8 +52,10 @@ export default {
         browser: {
             production: [
                 historyMiddleware,
+                socketMiddleware
             ],
             development: [
+                // socketMiddleware,
                 historyMiddleware,
                 {$ref: 'chromeDevTools'},
                 devTools()
