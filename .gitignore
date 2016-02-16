@@ -7,3 +7,5 @@ docs
 
 bundle.js
 bundle1.js
+
+db.development.sqlite

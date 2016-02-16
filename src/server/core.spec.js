@@ -19,7 +19,7 @@ import NewsRouter           from './api/falcor/routers/news';
 
 import routes               from '../common/routes';
 
-import apiRoutes            from './api/express/routes';
+import apiRouter            from './api/express/routes';
 
 export default {
     $plugins: [
@@ -45,7 +45,7 @@ export default {
         },
         expressApiRoutesMiddleware: {
             api: [
-                {basePath: '/api' , routes: apiRoutes},
+                {basePath: '/api' , router: apiRouter},
             ]
         },
         wildcardRouteMiddleware: {
