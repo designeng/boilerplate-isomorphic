@@ -9,17 +9,14 @@ export default function falcorMiddleware() {
     return next => action => {
 
         /* destructuring action object to local variables*/
-        const { promise, isFalcorRequest, type, ...rest } = action;
+        const { promise, isContactsRequest, type, ...rest } = action;
 
         /* filter out all requests, that is not a Firebase promise */
-        if (!promise && !isFalcorRequest) return next(action);
+        if (!isContactsRequest) return next(action);
 
         const REQUEST = type + '_REQUEST';
         const SUCCESS = type + '_SUCCESS';
         const FAILURE = type + '_FAILURE';
-
-
-        console.info("action::::::", action);
 
         /*triggers CONTACTS_GET_REQUEST action*/
         next({...rest, type: CONTACTS_GET_REQUEST});

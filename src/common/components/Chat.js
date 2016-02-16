@@ -26,8 +26,8 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        // this.props.contactsGet()
-        this.props.messagesGet()
+        this.props.contactsGet();
+        this.props.messagesGet();
         this.textarea = document.getElementById("messageField");
     }
 
@@ -43,9 +43,9 @@ class Chat extends Component {
     }
 
     renderContacts(contactsList) {
+        // TODO: how to avoid it?
         if(typeof contactsList == "undefined" || contactsList.length === 0) return "";
         
-        console.log("contactsList::::::", contactsList);
         return contactsList.map(contact => {
             return <li key={contact.key}>{contact.name}</li>
         });
@@ -53,8 +53,6 @@ class Chat extends Component {
 
     render() {
         const { list, messages } = this.props;
-
-        console.log("messages::::::::", messages);
 
         return (
             <section>
@@ -70,7 +68,8 @@ class Chat extends Component {
 }
 
 Chat.need = [
-    ContactsActions.contactsGet
+    ContactsActions.contactsGet,
+    MessagesActions.messagesGet
 ]
 
 export default Chat;

@@ -21,6 +21,6 @@ export function messagesGet(data) {
     return {
         type                : MESSAGES_GET_REQUEST,
         promise             : request.get('/api/messages'),
-        isSocketIoRequest   : false,
+        isMessageExpressApiRequest   : true,
     };
 }

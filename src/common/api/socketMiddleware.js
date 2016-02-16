@@ -14,9 +14,11 @@ if(process.env.NODE_ENV == "server"){
     socket = io(config.socketio.host);
 }
 
-export default function falcorMiddleware() {
+export default function socketMiddleware() {
     return next => action => {
         const { isSocketIoRequest, message, userId, type, ...rest } = action;
+
+        console.log("expressApiMiddleware action::::::.....", action);
 
         if (!isSocketIoRequest) return next(action);
 

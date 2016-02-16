@@ -29,14 +29,13 @@ export default function contacts(state = {isFetching: false, error: null}, actio
                 }
             );
         case CONTACTS_GET_SUCCESS:
-            console.log("SUCCESS::::", action);
             return Object.assign(
                 {},
                 state,
                 {
                     isFetching: false,
                     error: false,
-                    list: action.list,
+                    list: action.contacts,
                 });
         case CONTACTS_GET_FAILURE:
             return Object.assign(

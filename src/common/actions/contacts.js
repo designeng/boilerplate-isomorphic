@@ -9,6 +9,6 @@ export function contactsGet() {
     return {
         type: CONTACTS_GET,
         promise: contactsModel.getValue(['contacts']),
-        isFalcorRequest: true
+        isContactsRequest: true
     };
 }
