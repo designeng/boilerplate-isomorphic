@@ -19,6 +19,7 @@ import thunk                from 'redux-thunk';
 
 import promiseMiddleware    from '../api/promiseMiddleware';
 import firebaseMiddleware   from '../api/firebaseMiddleware';
+import expressApiMiddleware from '../api/expressApiMiddleware';
 import falcorMiddleware     from '../api/falcorMiddleware';
 import socketMiddleware     from '../api/socketMiddleware';
 // ---------- /imported middlewares -----------
@@ -44,6 +45,7 @@ export default {
         thunk, 
         promiseMiddleware,
         firebaseMiddleware,
+        expressApiMiddleware,
         falcorMiddleware,
         socketMiddleware
     ],

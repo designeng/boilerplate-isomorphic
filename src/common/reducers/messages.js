@@ -3,7 +3,7 @@ import {
     MESSAGE_SEND_REQUEST
 } from '../actions/messages';
 
-export default function socket(state = {}, action) {
+export default function messages(state = {}, action) {
 
     console.log("ACTION IN SOCKET REDUCER::::", action);
 
