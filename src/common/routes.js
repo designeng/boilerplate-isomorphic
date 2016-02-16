@@ -14,7 +14,7 @@ export default (
     <Route name="app" path="/" component={App}>
         <Route path="home" component={HomePage}/>
         <Route path="experiments" component={ExperimentsPage}/>
-        <Route path="chat" component={ChatPage}/>
+        <Route path="chat" component={ChatPage} socketIoHost="TEST"/>
         <Route path="*" component={error404}/>
     </Route>
 );

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as ContactsActions from '../actions/contacts';
+import config from '../config';
 
 function mapStateToProps(state) {
     return {list: state.contacts.list};
@@ -25,7 +26,7 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        this.socket = io(this.props.socketIoHost);
+        this.socket = io(config.socketio.host);
         this.textarea = document.getElementById("messageField");
     }
 
@@ -35,7 +36,7 @@ class Chat extends Component {
         this.socket.emit('chat_click', {message: message});
         console.log("CLICK", message);
 
-        this.store.dispatch({type: 'MESSAGES_GET_REQUEST'})
+        // this.store.dispatch({type: 'MESSAGES_GET_REQUEST'})
     }
 
     handleChange(event) {
