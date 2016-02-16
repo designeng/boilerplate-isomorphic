@@ -4,6 +4,8 @@
 
 import wireDebugPlugin      from 'essential-wire/source/debug';
 import expressAppPlugin     from './plugins/express/application';
+import socketIOPlugin       from './plugins/express/socket';
+
 import wildcardRoutePlugin  from './plugins/express/router/wildcard';
 import expressFalcorPlugin  from './plugins/express/falcor/middleware';
 import webpackPlugin        from './plugins/express/webpack/middleware';
@@ -22,10 +24,11 @@ export default {
         expressAppPlugin,
         wildcardRoutePlugin,
         expressFalcorPlugin,
-        webpackPlugin
+        webpackPlugin,
+        socketIOPlugin
     ],
     app: {
-        expressApplication: true,
+        createExpressApplication: true,
         webpackMiddleware: {
             webpackConfig: webpackConfig
         },
@@ -45,8 +48,13 @@ export default {
                 '404': 'Not found',
                 '500': 'Internal server error'
             }
-        },
-        server: {
+        }
+    },
+
+    // socketIo server will be started upon express application:
+    socketIo: {
+        createSocketIOServer: {
+            app             : {$ref: 'app'},
             port            : process.env.PORT || 3000,
             verbose         : true
         }
