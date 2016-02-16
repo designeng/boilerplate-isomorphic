@@ -1,3 +1,8 @@
+import { 
+    MESSAGE_SEND,
+    MESSAGE_SEND_REQUEST
+} from '../../../common/actions/messages';
+
 export default function usersActivity(io) {
     io.on('connection', function (socket) {
 
@@ -5,7 +10,7 @@ export default function usersActivity(io) {
             socket.emit('message_from_server', { hello: 'world' });
         }, 3000);
         
-        socket.on('chat_click', function (data) {
+        socket.on(MESSAGE_SEND, function (data) {
             console.log(data);
         });
         

@@ -44,7 +44,8 @@ export default {
         thunk, 
         promiseMiddleware,
         firebaseMiddleware,
-        falcorMiddleware
+        falcorMiddleware,
+        socketMiddleware
     ],
 
     middleware: {
@@ -55,7 +56,6 @@ export default {
                 socketMiddleware
             ],
             development: [
-                // socketMiddleware,
                 historyMiddleware,
                 {$ref: 'chromeDevTools'},
                 devTools()
