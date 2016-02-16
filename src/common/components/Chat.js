@@ -6,9 +6,12 @@ import { bindActionCreators } from 'redux';
 import * as ContactsActions from '../actions/contacts';
 import * as MessagesActions from '../actions/messages';
 
+import MessagesList from './chat/messages';
+
 function mapStateToProps(state) {
     return {
-        list: state.contacts.list
+        list            : state.contacts.list,
+        messagesList    : state.messages.messagesList
     };
 }
 
@@ -24,6 +27,7 @@ class Chat extends Component {
 
     componentDidMount() {
         this.props.contactsGet()
+        this.props.messagesGet()
         this.textarea = document.getElementById("messageField");
     }
 
@@ -39,21 +43,23 @@ class Chat extends Component {
     }
 
     renderContacts(contactsList) {
-        if(typeof contactsList === "undefined") return "";
+        if(typeof contactsList == "undefined" || contactsList.length === 0) return "";
         
+        console.log("contactsList::::::", contactsList);
         return contactsList.map(contact => {
             return <li key={contact.key}>{contact.name}</li>
         });
     }
 
     render() {
-        const { list } = this.props;
+        const { list, messagesList } = this.props;
 
         return (
             <section>
                 <ul>
                     { this.renderContacts(list) }
                 </ul>
+                <MessagesList messages={ this.props.messagesList }/>
                 <textarea id="messageField" onChange={this.handleChange.bind(this)}/>
                 <input type="button" value='Send Message' onClick={this.handleClick.bind(this)} />
             </section>

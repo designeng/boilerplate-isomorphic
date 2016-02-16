@@ -1,8 +1,12 @@
+import { 
+    MESSAGES_GET
+} from '../actions/messages';
+
 export default function promiseMiddleware() {
     return next => action => {
         const { promise, type, ...rest } = action;
 
-        if (!promise || rest.isFalcorRequest || rest.isFireBaseRequest) return next(action);
+        if (!promise || rest.isFalcorRequest || rest.isFireBaseRequest || type == MESSAGES_GET) return next(action);
 
         const SUCCESS = type + '_SUCCESS';
         const REQUEST = type + '_REQUEST';

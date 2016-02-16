@@ -1,11 +1,15 @@
 import { 
     MESSAGE_SEND,
-    MESSAGE_SEND_REQUEST
+    MESSAGE_SEND_REQUEST,
+
+    MESSAGES_GET,
+    MESSAGES_GET_SUCCESS,
+    MESSAGES_GET_FAILURE
 } from '../actions/messages';
 
 export default function messages(state = {}, action) {
 
-    console.log("ACTION IN SOCKET REDUCER::::", action);
+    console.log("ACTION IN MESSAGES REDUCER::::", action);
 
     switch (action.type) {
         case MESSAGE_SEND:
@@ -18,13 +22,40 @@ export default function messages(state = {}, action) {
                 });
 
         case MESSAGE_SEND_REQUEST:
-            /*ES6 Syntax for updating state with Object.assign(). */
-            /* Create a new object, copy all props from old state and set isFetching to true */
             return Object.assign(
                 {},
                 state,
                 {
                     isFetching: true
+                }
+            );
+
+        case MESSAGES_GET:
+            return Object.assign(
+                {},
+                state,
+                {
+                    isFetching: true,
+                    error: false,
+                });
+
+        case MESSAGES_GET_SUCCESS:
+            return Object.assign(
+                {},
+                state,
+                {
+                    isFetching: false,
+                    messagesList: action.messages
+                }
+            );
+
+        case MESSAGES_GET_FAILURE:
+            return Object.assign(
+                {},
+                state,
+                {
+                    isFetching: false,
+                    error: true
                 }
             );
 

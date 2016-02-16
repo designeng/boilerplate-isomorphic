@@ -43,11 +43,11 @@ export default {
 
     universalMiddleware: [
         thunk, 
-        promiseMiddleware,
         firebaseMiddleware,
         expressApiMiddleware,
         falcorMiddleware,
-        socketMiddleware
+        socketMiddleware,
+        promiseMiddleware
     ],
 
     middleware: {

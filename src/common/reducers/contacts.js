@@ -7,8 +7,6 @@ import {
 
 export default function contacts(state = {isFetching: false, error: null}, action) {
 
-    console.log("ACTION IN REDUCER::::", action);
-
     switch (action.type) {
         case CONTACTS_GET:
             return Object.assign(

@@ -1,5 +1,5 @@
 import { 
-    MESSAGE_GET,
+    MESSAGES_GET,
     MESSAGES_GET_FAILURE
 } from '../actions/messages';
 
@@ -8,10 +8,11 @@ export default function expressApiMiddleware() {
 
         const { promise, type, ...rest } = action;
 
-        if (!promise && type !== MESSAGE_GET) return next(action);
+        if (!promise && type !== MESSAGES_GET) return next(action);
 
         return promise
             .then(messages => {
+                console.log("MESSAGES:::::", messages);
                 if (messages === null) {
                     var error = new Error('No data.');
                     next({...rest, error, type: MESSAGES_GET_FAILURE});
