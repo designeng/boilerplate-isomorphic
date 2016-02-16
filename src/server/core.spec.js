@@ -7,6 +7,7 @@ import expressAppPlugin     from './plugins/express/application';
 import socketIOPlugin       from './plugins/express/socket';
 
 import wildcardRoutePlugin  from './plugins/express/router/wildcard';
+import initApiRoutesPlugin  from './plugins/express/router/initRoutes';
 import expressFalcorPlugin  from './plugins/express/falcor/middleware';
 import webpackPlugin        from './plugins/express/webpack/middleware';
 
@@ -18,11 +19,14 @@ import NewsRouter           from './api/falcor/routers/news';
 
 import routes               from '../common/routes';
 
+import apiRoutes            from './api/express/routes';
+
 export default {
     $plugins: [
         wireDebugPlugin,
         expressAppPlugin,
         wildcardRoutePlugin,
+        initApiRoutesPlugin,
         expressFalcorPlugin,
         webpackPlugin,
         socketIOPlugin
@@ -37,6 +41,11 @@ export default {
                 {apiPath: '/navigation/model.json' , router: NavigationRouter},
                 {apiPath: '/news/model.json'       , router: NewsRouter},
                 {apiPath: '/contacts/model.json'   , router: ContactsRouter}
+            ]
+        },
+        expressApiRoutesMiddleware: {
+            api: [
+                {basePath: '/api' , routes: apiRoutes},
             ]
         },
         wildcardRouteMiddleware: {
