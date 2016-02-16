@@ -1,17 +1,14 @@
-import fs from "fs";
-import path from "path";
-import Sequelize from "sequelize";
+"use strict";
 
-import configuration from "./../config/config.js";
+var fs        = require("fs");
+var path      = require("path");
+var Sequelize = require("sequelize");
+var configuration = require("./../config/config.js");
+var config    = configuration["development"];
 
-// const env = process.env.NODE_ENV || "development";
-const config = configuration["development"];
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-console.log("config.........", configuration);
-
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
-
-let db = {};
+var db        = {};
 
 fs
     .readdirSync(__dirname)
@@ -32,4 +29,4 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-export default db;
+module.exports = db;
