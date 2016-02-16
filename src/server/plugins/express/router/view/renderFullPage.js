@@ -8,11 +8,12 @@ export default function renderFullPage(html, initialState){
         <title>Isomorphic Redux Boilerplate</title>
         ${styleLink}
       </head>
-      <body >
+      <body>
         <div id="root">${html}</div>
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
         </script>
+        <script src="/socket.io/socket.io.js"></script>
         <script src="/static/bundle.js"></script>
       </body>
     </html>

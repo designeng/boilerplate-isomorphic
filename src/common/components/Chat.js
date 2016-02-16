@@ -25,7 +25,7 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        // this.socket = io(this.props.socketIoHost);
+        this.socket = io(this.props.socketIoHost);
         this.textarea = document.getElementById("messageField");
     }
 
