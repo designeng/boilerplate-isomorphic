@@ -16,12 +16,12 @@ if(process.env.NODE_ENV == "server"){
 
 export default function falcorMiddleware() {
     return next => action => {
-        const { isSocketIoRequest, message, type, ...rest } = action;
+        const { isSocketIoRequest, message, userId, type, ...rest } = action;
 
         if (!isSocketIoRequest) return next(action);
 
         if(type === MESSAGE_SEND) {
-            socket.emit(MESSAGE_SEND, {message: message});
+            socket.emit(MESSAGE_SEND, { message, userId });
 
             next({
                 ...rest, 

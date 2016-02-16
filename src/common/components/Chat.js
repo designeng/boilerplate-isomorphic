@@ -28,7 +28,10 @@ class Chat extends Component {
     }
 
     handleClick() {
-        this.props.messageSend(this.textarea.value);
+        this.props.messageSend({
+            message: this.textarea.value, 
+            userId: 'John'
+        });
     }
 
     handleChange(event) {
