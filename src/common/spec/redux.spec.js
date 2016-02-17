@@ -17,10 +17,10 @@ import rootReducer          from '../reducers/index';
 // universal middleware
 import thunk                from 'redux-thunk';
 
-import promiseMiddleware    from '../api/promiseMiddleware';
-import expressApiMiddleware from '../api/expressApiMiddleware';
-import falcorMiddleware     from '../api/falcorMiddleware';
-import socketMiddleware     from '../api/socketMiddleware';
+import promiseMiddleware    from '../middleware/promiseMiddleware';
+import expressApiMiddleware from '../middleware/expressApiMiddleware';
+import falcorMiddleware     from '../middleware/falcorMiddleware';
+import socketMiddleware     from '../middleware/socketMiddleware';
 // ---------- /imported middlewares -----------
 
 
