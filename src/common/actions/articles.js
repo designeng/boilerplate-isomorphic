@@ -9,9 +9,10 @@ export const ADD_ARTICLE = 'ADD_ARTICLE';
 export const REMOVE_ARTICLE = 'REMOVE_ARTICLE';
 
 export function articlesGet() {
+    console.log("NEW REQUEST::::" + Date.now());
     return {
         type: ARTICLES_GET,
-        promise: request.get('https://chicagowepapp.firebaseio.com/articles.json'),
+        promise: request.get('https://chicagowepapp.firebaseio.com/articles.json?time=' + Date.now()),
         isFireBaseRequest: true
     };
 }

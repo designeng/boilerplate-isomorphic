@@ -6,11 +6,23 @@ import {
     MESSAGE_FROM_SERVER
 } from '../../../common/actions/messages';
 
+let counter = 0;
+
 export default function usersActivity(io) {
     io.on('connection', function (socket) {
 
-        setTimeout(() => {
-            socket.emit(MESSAGE_FROM_SERVER, { message: 'hello world', userId: 'Richard' });
+        setInterval(() => {
+            const newMessage = {
+                userId: "Robert",
+                message: "Hello from server " + (counter++)
+            }
+
+            models.Message.create({
+                userId  : newMessage.userId,
+                text    : newMessage.message
+            }).then(function (res) {
+                socket.emit(MESSAGE_FROM_SERVER, newMessage);
+            });
         }, 3000);
         
         socket.on(MESSAGE_SEND, function (data) {

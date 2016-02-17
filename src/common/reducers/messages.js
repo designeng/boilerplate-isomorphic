@@ -45,7 +45,8 @@ export default function messages(state = {}, action) {
                 state,
                 {
                     isFetching: false,
-                    messages: action.messages
+                    // hack!
+                    messages: action.messages || action.response.data.messages
                 }
             );
 
