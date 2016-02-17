@@ -2,7 +2,7 @@ import React from 'react';
 import { match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
 
-import { fetchComponentDataBeforeRender } from '../../../../common/api/fetchComponentDataBeforeRender';
+import { fetchComponentDataBeforeRender } from '../../../utils/api/fetchComponentDataBeforeRender';
 
 import renderFullPage from './view/renderFullPage';
 import getInitialView from './view/getInitialView';

@@ -18,18 +18,18 @@ delete process.env.BROWSER;
 // }).otherwise(error => console.error("ERROR reduxSpec:", error));
 
 
-const first = () => {
+const reduxTask = () => {
     return wire(reduxSpec);
 }
 
-const second = (context) => {
+const userTask = (context) => {
     return context.wire(userSpec);
 }
 
-const third = (context) => {
+const coreTask = (context) => {
     return context.wire(coreSpec);
 }
 
-pipeline([first, second, third]).then(context => {
+pipeline([reduxTask, userTask, coreTask]).then(context => {
     usersActivity(context.socketIo);
 }).otherwise(error => console.error("ERROR in coreSpec:", error));
