@@ -26,6 +26,7 @@ class Chat extends Component {
     }
 
     componentDidMount() {
+        this.messagesList = this.refs.messagesList;
         this.props.contactsGet();
         this.props.messagesGet();
         this.textarea = document.getElementById("messageField");
@@ -37,7 +38,10 @@ class Chat extends Component {
             userId: 'John'
         }
         // optimistic update
+        // TODO: make it work
+        // this.messagesList.props.messages.push(Object.assign(message, {id: Date().now}));
         // this.props.messageAdd(Object.assign({}, {presentMessages: this.props.messages, message: Object.assign({message: message.message + " OPT"})}));
+        
         // send message to server
         this.props.messageSend(message);
     }
@@ -63,7 +67,7 @@ class Chat extends Component {
                 <ul>
                     { this.renderContacts(list) }
                 </ul>
-                <MessagesList messages={ this.props.messages }/>
+                <MessagesList messages={ this.props.messages } ref="messagesList"/>
                 <textarea id="messageField" onChange={this.handleChange.bind(this)}/>
                 <input type="button" value='Send Message' onClick={this.handleClick.bind(this)} />
             </section>
