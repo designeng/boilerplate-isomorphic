@@ -7,7 +7,10 @@ import {
     messagesGet
 } from '../actions/messages';
 
-let socket, _next;
+let socket, 
+// TODO: without storing in _next var?
+_next;
+
 if(process.env.NODE_ENV == "server"){
     socket = {
         emit: () => {},

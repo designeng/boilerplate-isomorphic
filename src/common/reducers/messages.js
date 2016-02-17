@@ -1,4 +1,5 @@
 import { 
+    MESSAGE_ADD,
     MESSAGE_SEND,
     MESSAGE_SEND_REQUEST,
 
@@ -9,9 +10,28 @@ import {
 
 export default function messages(state = {}, action) {
 
-    console.log("ACTION IN MESSAGES REDUCER::::", action.messages, action);
+    
 
     switch (action.type) {
+        case MESSAGE_ADD:
+            console.log("ACTION:::", action, action.payload);
+
+            let newMessage = Object.assign({}, action.payload.message, { 
+                id: Date.now()
+            });
+
+            let messages = action.payload.presentMessages;
+            messages.push(newMessage);
+
+            return Object.assign(
+                {},
+                state,
+                {
+                    messages: messages,
+                    isFetching: false,
+                    error: false,
+                });
+
         case MESSAGE_SEND:
             return Object.assign(
                 {},

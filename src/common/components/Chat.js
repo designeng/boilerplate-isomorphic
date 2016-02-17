@@ -32,10 +32,14 @@ class Chat extends Component {
     }
 
     handleClick() {
-        this.props.messageSend({
+        const message = {
             message: this.textarea.value, 
             userId: 'John'
-        });
+        }
+        // optimistic update
+        this.props.messageAdd(Object.assign({}, {presentMessages: this.props.messages, message: Object.assign({message: message.message + " OPT"})}));
+        // send message to server
+        this.props.messageSend(message);
     }
 
     handleChange(event) {
